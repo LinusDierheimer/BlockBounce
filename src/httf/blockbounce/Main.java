@@ -13,6 +13,10 @@ public class Main extends Application {
 		this.stage.setScene(state.getScene());
 	}
 	
+	public Stage getStage() {
+		return stage;
+	}
+	
 	@Override
 	public void start(Stage stage) throws Exception{
 		this.stage = stage;

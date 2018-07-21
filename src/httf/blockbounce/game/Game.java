@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class Game extends GameState{
 	
-	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("backgroud.png");
+	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.jpg");
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	
@@ -19,6 +19,7 @@ public class Game extends GameState{
 	
 	public Game(Main main) {
 		super(main);
+		main.getStage().setMaximized(true);
 	}
 	
 	@Override
