@@ -56,9 +56,15 @@ public class Game extends GameState{
 	private double playerY = 50;
 	private static final double playerX = 200;
 	private static final double gravityForce = 12;
+<<<<<<< HEAD
 	
 	private double jumpTime = 0;
 	
+=======
+	
+	private double jumpTime = 0;
+	
+>>>>>>> parent of 85f94a8... Merge branch 'master' of https://github.com/Steinschnueffler/BlockBounce
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
