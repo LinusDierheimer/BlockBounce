@@ -12,5 +12,4 @@ public abstract class GameState implements Runnable{
 		this.main = main;
 	}
 
-
 }

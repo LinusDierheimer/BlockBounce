@@ -4,13 +4,14 @@ import httf.blockbounce.game.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-
 public class Main extends Application {
 	
 	private Stage stage;
 	
 	public void setGameState(GameState state) {
+		this.stage.hide();
 		this.stage.setScene(state.getScene());
+		this.stage.show();
 		state.run();
 	}
 	
