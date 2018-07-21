@@ -57,7 +57,7 @@ public class Game extends GameState{
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
-		playerView.setLayoutX(START_TILE_X);
+		playerView.setLayoutX(START_TILE_X + playerView.getImage().getHeight());
 	}
 	
 	private static final double GRAVITY_FORCE = 20;
@@ -223,7 +223,6 @@ public class Game extends GameState{
 			main.setGameState(new EndScreen(main));
 		}
 		playerY += GRAVITY_FORCE * dt;
-		System.out.println("f:" + floorY + ", p" + playerY);
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
 			{
