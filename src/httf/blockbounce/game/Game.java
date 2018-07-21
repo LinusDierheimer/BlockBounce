@@ -10,10 +10,13 @@ import httf.blockbounce.resources.ResourceLoader;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Game extends GameState{
 	
@@ -23,6 +26,7 @@ public class Game extends GameState{
 	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
 	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
+	private Label scoreLabel = new Label("0");
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	
@@ -101,6 +105,12 @@ public class Game extends GameState{
 
 		root.getChildren().add(playerView);
 		playerView.setLayoutX(playerX);
+		
+		System.out.println(root.getWidth());
+		
+		root.getChildren().add(scoreLabel);
+		initLabel();
+		
 	}
 	
 	
@@ -215,4 +225,12 @@ public class Game extends GameState{
 	public void run() {
 		timer.start();
 	}
+	
+	private void initLabel() {
+		//scoreLabel.setLayoutX(root.getWidth()- 30 - scoreLabel.getWidth());
+		scoreLabel.setLayoutY(20);
+		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
+		scoreLabel.setFont(new Font("Impact", 25));
+	}
+	
 }
