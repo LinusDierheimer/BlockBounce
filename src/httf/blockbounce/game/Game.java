@@ -1,4 +1,4 @@
-package httf.blockbounce.game;
+ package httf.blockbounce.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 
 public class Game extends GameState{
 	
@@ -109,9 +108,9 @@ public class Game extends GameState{
 		main.getStage().setMinWidth(WIDTH);
 		main.getStage().setMinHeight(HEIGHT);
 		main.getStage().setFullScreenExitHint("");
-		//main.getStage().setResizable(false);
+		main.getStage().setResizable(false);
+		main.getStage().setMaximized(false);
 		
-		System.out.println(root.getWidth());
 		root.getChildren().add(scoreLabel);
 		initLabel();
 	}
@@ -251,6 +250,7 @@ public class Game extends GameState{
 	public void run() {
 		timer.start();
 	}
+	
 	private void initLabel() {
 		
 		scoreLabel.setLayoutX(30);
