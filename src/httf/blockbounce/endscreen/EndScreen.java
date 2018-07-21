@@ -1,4 +1,4 @@
-package httf.blockbounce.mainmenu;
+package httf.blockbounce.endscreen;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -9,27 +9,27 @@ import httf.blockbounce.resources.ResourceLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-public class MainMenu extends GameState{
+public class EndScreen extends GameState{
 
-	public MainMenu(Main main) {
+	public EndScreen(Main main) {
 		super(main);
 	}
 
 	@Override
 	public Scene getScene() {
-		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL("mainmenu.fxml"));
+		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL("endscreen.fxml"));
 		try {
 			loader.load();
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
-		MainMenuController controller = loader.getController();
+		EndScreenController controller = loader.getController();
 		controller.main = main;
 		main.getStage().setTitle("Block Bouncer");
 		main.getStage().setMaximized(true);
 		return new Scene(loader.getRoot());
 	}
-
+	
 	@Override
 	public void run() {}
 
