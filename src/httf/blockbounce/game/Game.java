@@ -77,12 +77,9 @@ public class Game extends GameState{
 //		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 //			scale.setY(newValue.doubleValue() / height);
 //		});
-<<<<<<< HEAD
-		
-=======
+
 		root.getChildren().add(playerView);
 		playerView.setLayoutX(200);
->>>>>>> aa4887d7cd508bc7f9aeca6868112f21cae0c4f0
 	}
 	
 	
@@ -148,7 +145,7 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY +=2.5;		//todo dt einbeziehen
+		playerY += 12 * dt;
 		
 		if(playerY >= 167) 
 		{

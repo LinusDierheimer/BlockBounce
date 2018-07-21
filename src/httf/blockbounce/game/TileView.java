@@ -13,7 +13,6 @@ public class TileView extends ImageView{
 	}
 	
 	public void moveLeft(double howMuch) {
-		System.out.println(howMuch);
 		setLayoutX(getLayoutX() - howMuch);
 	}
 	
