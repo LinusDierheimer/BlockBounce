@@ -211,26 +211,34 @@ public class Game extends GameState{
 		
 	}
 	private void updatePlayer(double dt) {
-		
 		double floorY = getHeight(START_TILE_X);
+
+		
+		if(floorY == 0) {
+			return;
+		}
+		
 		playerY += GRAVITY_FORCE * dt;
-		if(playerY >= floorY) 
-		{
-			playerY = floorY;
-			playerView.setImage(PLAYER_IMAGE);
-		}
-		
-		if(upPressed && playerY == floorY) {
-			jumpTime = 25;
-			upPressed = false;
-			playerView.setImage(PLAYERJUMP_IMAGE);
-		}
-		
-		if(jumpTime > 0) {
-			playerY -=6.5;
-			jumpTime --;
-			if(jumpTime == 0) {
-				playerView.setImage(PLAYERLANDING_IMAGE);
+		System.out.println("f:" + floorY + ", p" + playerY);
+		if(floorY > - 1) {
+			if(playerY >= floorY) 
+			{
+				playerY = floorY;
+				playerView.setImage(PLAYER_IMAGE);
+			}
+			
+			if(upPressed && playerY == floorY) {
+				jumpTime = 25;
+				upPressed = false;
+				playerView.setImage(PLAYERJUMP_IMAGE);
+			}
+			
+			if(jumpTime > 0) {
+				playerY -=6.5;
+				jumpTime --;
+				if(jumpTime == 0) {
+					playerView.setImage(PLAYERLANDING_IMAGE);
+				}
 			}
 		}
 		
