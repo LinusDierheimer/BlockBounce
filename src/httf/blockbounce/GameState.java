@@ -2,7 +2,7 @@ package httf.blockbounce;
 
 import javafx.scene.Scene;
 
-public abstract class GameState{
+public abstract class GameState implements Runnable{
 	
 	protected final Main main;
 	
@@ -11,5 +11,6 @@ public abstract class GameState{
 	public GameState(Main main) {
 		this.main = main;
 	}
-	
+
+
 }

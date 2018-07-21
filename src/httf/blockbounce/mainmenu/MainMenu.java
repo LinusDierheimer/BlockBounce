@@ -15,4 +15,9 @@ public class MainMenu extends GameState{
 		return null;
 	}
 
+	@Override
+	public void run() {
+		
+	}
+
 }

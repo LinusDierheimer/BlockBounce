@@ -11,6 +11,7 @@ public class Main extends Application {
 	
 	public void setGameState(GameState state) {
 		this.stage.setScene(state.getScene());
+		state.run();
 	}
 	
 	public Stage getStage() {
