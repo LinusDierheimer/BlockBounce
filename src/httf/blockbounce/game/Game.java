@@ -48,6 +48,10 @@ public class Game extends GameState{
 	
 	private double playerY = 50;
 	
+	private double jumpTime = 0;
+	
+	private double jumpTaste = 100;
+	
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -167,6 +171,18 @@ public class Game extends GameState{
 		if(playerY >= 167) 
 		{
 			playerY = 167;
+		}
+		if(jumpTaste > 0) {
+			jumpTaste --;
+		}
+		if(jumpTaste == 0) {
+			jumpTime = 25;
+			jumpTaste = 100;
+		}
+		
+		if(jumpTime > 0) {
+			playerY -=6.5;
+			jumpTime --;
 		}
 	}
 	
