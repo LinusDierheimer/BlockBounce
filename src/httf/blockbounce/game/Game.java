@@ -203,7 +203,6 @@ public class Game extends GameState{
 		
 		double floorY = getHeight(START_TILE_X);
 		playerY += GRAVITY_FORCE * dt;
-		System.out.println(floorY);
 		if(playerY >= floorY) 
 		{
 			playerY = floorY;
