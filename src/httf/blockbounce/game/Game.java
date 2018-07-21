@@ -198,16 +198,16 @@ public class Game extends GameState{
 	
 	private void updatePlayer(double dt) {
 		
-			
+		double floorY = getHeight(START_TILE_X);
 		playerY += GRAVITY_FORCE * dt;
-		
-		if(playerY >= 167) 
+		System.out.println(floorY);
+		if(playerY >= floorY) 
 		{
-			playerY = 167;
+			playerY = floorY;
 			playerView.setImage(PLAYER_IMAGE);
 		}
 		
-		if(upPressed && playerY == 167) {
+		if(upPressed && playerY == floorY) {
 			jumpTime = 25;
 			upPressed = false;
 			playerView.setImage(PLAYERJUMP_IMAGE);
