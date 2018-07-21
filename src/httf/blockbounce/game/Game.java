@@ -36,18 +36,18 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
-	private static final int TILE_SPEED = 15;
+	private static final int TILE_SPEED = 20;
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
-		long old = System.currentTimeMillis();
+		long old = System.nanoTime();
 		
 		@Override
 		public void handle(long now) {
 			
 			double dt = (now - old) / 100000000.0;
 			old = now;
-			
+						
 			update(dt);
 			render(dt);
 		}
@@ -72,6 +72,7 @@ public class Game extends GameState{
 //		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 //			scale.setY(newValue.doubleValue() / height);
 //		});
+		
 	}
 	
 	@Override
@@ -79,11 +80,22 @@ public class Game extends GameState{
 		return scene;
 	}
 	
-	private void addTile() {
-		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
-		TileView view = randomTile.createView();
+	private void addTile(Tile tile) {
+		TileView view = tile.createView();
 		view.setLayoutY(200);
 		view.setLayoutX(width);
+		tiles.add(view);
+		root.getChildren().add(view);
+	}
+	
+	private void addTile() {
+		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
+		addTile(randomTile);
+	}
+	
+	private void addStartTile(){
+		TileView view = Tile.START_TILE.createView();
+		view.setY(200);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
@@ -98,7 +110,7 @@ public class Game extends GameState{
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
-			addTile();
+			addStartTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
 			if(lastTile.rightX() < main.getStage().getWidth() - nextDistance) {
