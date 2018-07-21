@@ -35,14 +35,11 @@ public class Game extends GameState{
 			
 			update(dt);
 			render(dt);
-			System.out.println(dt);
 		}
 	};
 	
 	private List<ImageView> shownTiles = new ArrayList<>();
-	
-	private boolean running = true;
-	
+		
 	private AnchorPane root = new AnchorPane(backgroundView);
 	private Scene scene = new Scene(root);
 	
@@ -55,15 +52,15 @@ public class Game extends GameState{
 	public Scene getScene() {
 		return scene;
 	}
-		
-	private void render(double dt) {
-		shownTiles.forEach(e -> {
-			e.setLayoutX(e.getLayoutX() -2);
-		});
-	}
-
+	
 	private void update(double dt) {
 		
+	}
+	
+	private void render(double dt) {
+		shownTiles.forEach(e -> {
+			e.setLayoutX(e.getLayoutX() - 2 * dt);
+		});
 	}
 	
 	@Override
