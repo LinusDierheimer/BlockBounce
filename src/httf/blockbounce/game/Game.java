@@ -7,34 +7,28 @@ import java.util.Random;
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
+import javafx.scene.transform.Scale;
 
 public class Game extends GameState{
 	
 	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
+	
 	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
-	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
-	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
 	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
-	private Label scoreLabel = new Label("0");
-	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
-	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	
+	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
+	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
 	
-	
-	private static final Random random = new Random();
+	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
-		return random.nextDouble() * (max - min) + min;
+		return RANDOM.nextDouble() * (max - min) + min;
 	}
 	
 	private List<TileView> tiles = new ArrayList<>();
@@ -52,19 +46,32 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 20;
+	private static final double START_TILE_X = 200;
+
+	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
+	{
+		playerView.setLayoutX(START_TILE_X);
+	}
+	
+	private static final double GRAVITY_FORCE = 12;
 	
 	private double playerY = 50;
-	private static final double playerX = 200;
-	private static final double gravityForce = 12;
-<<<<<<< HEAD
-	
 	private double jumpTime = 0;
 	
-=======
+	private AnchorPane root = new AnchorPane(backgroundView, playerView);
+	private Scene scene = new Scene(root);
 	
-	private double jumpTime = 0;
-	
->>>>>>> parent of 85f94a8... Merge branch 'master' of https://github.com/Steinschnueffler/BlockBounce
+	private Scale scale = new Scale();
+	{
+		root.getTransforms().add(scale);
+		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setX(newValue.doubleValue() / WIDTH);
+		});
+		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setY(newValue.doubleValue() / HEIGHT);
+		});
+	}
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -80,9 +87,6 @@ public class Game extends GameState{
 			render(dt);
 		}
 	};
-
-	private AnchorPane root = new AnchorPane(backgroundView);
-	private Scene scene = new Scene(root);
 	
 	private boolean upPressed = false;
 	{
@@ -95,28 +99,12 @@ public class Game extends GameState{
 	public Game(Main main) {
 		super(main);
 		//main.getStage().setMaximized(true);
-		main.getStage().setMinWidth(width);
-		main.getStage().setMinHeight(height);
+		main.getStage().setMinWidth(WIDTH);
+		main.getStage().setMinHeight(HEIGHT);
 		main.getStage().setFullScreenExitHint("");
-		main.getStage().setResizable(false);
-		
-//		Scale scale = new Scale();
-//		root.getTransforms().add(scale);
-//		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setX(newValue.doubleValue() / width);
-//		});
-//		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setY(newValue.doubleValue() / height);
-//		});
-
-		root.getChildren().add(playerView);
-		playerView.setLayoutX(playerX);
+		//main.getStage().setResizable(false);
 		
 		System.out.println(root.getWidth());
-		
-		root.getChildren().add(scoreLabel);
-		initLabel();
-		
 	}
 	
 	
@@ -128,19 +116,19 @@ public class Game extends GameState{
 	private void addTile(Tile tile) {
 		TileView view = tile.createView();
 		view.setLayoutY(generateTileHeight() + view.getTile().getHeight());
-		view.setLayoutX(width);
+		view.setLayoutX(WIDTH);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
 	
 	private void addTile() {
-		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
+		Tile randomTile = Tile.TILES.get(RANDOM.nextInt(Tile.TILES.size()));
 		addTile(randomTile);
 	}
 	
 	private void addStartTile(){
 		TileView view = Tile.START_TILE.createView();
-		view.setY(200);
+		view.setY(START_TILE_X);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
@@ -206,7 +194,7 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY += gravityForce * dt;
+		playerY += GRAVITY_FORCE * dt;
 		
 		if(playerY >= 167) 
 		{
@@ -244,12 +232,4 @@ public class Game extends GameState{
 	public void run() {
 		timer.start();
 	}
-	
-	private void initLabel() {
-		//scoreLabel.setLayoutX(root.getWidth()- 30 - scoreLabel.getWidth());
-		scoreLabel.setLayoutY(20);
-		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
-		scoreLabel.setFont(new Font("Impact", 25));
-	}
-	
 }

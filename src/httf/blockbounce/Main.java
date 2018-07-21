@@ -1,6 +1,7 @@
 package httf.blockbounce;
 	
 import httf.blockbounce.game.Game;
+import httf.blockbounce.mainmenu.MainMenu;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
