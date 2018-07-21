@@ -40,7 +40,8 @@ public class Game extends GameState{
 	
 	private static final int TILE_SPEED = 15;
 	
-	private int playerY = 50;
+	private double playerY = 50;
+	
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -77,6 +78,7 @@ public class Game extends GameState{
 //			scale.setY(newValue.doubleValue() / height);
 //		});
 		root.getChildren().add(playerView);
+		playerView.setLayoutX(120);
 	}
 	
 	
@@ -125,8 +127,12 @@ public class Game extends GameState{
 	
 	private void update(double dt) {
 		updateTiles(dt);
+		updatePlayer(dt);
 	}
 	
+	private void updatePlayer(double dt) {
+		playerY +=2;		//todo dt einbeziehen
+	}
 	private void render(double dt) {
 		renderTiles(dt);
 		renderPlayer(dt);
