@@ -13,19 +13,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Scale;
 
 public class Game extends GameState{
 	
 	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
+	
 	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
-	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
-	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
 	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
-	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
-	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	
-	
+	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
+	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	
 	private static final Random random = new Random();
 	private static final double randDouble(double min, double max) {
@@ -47,13 +46,32 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 20;
+	private static final double START_TILE_X = 200;
+
+	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
+	{
+		playerView.setLayoutX(START_TILE_X);
+	}
+	
+	private static final double GRAVITY_FORCE = 12;
 	
 	private double playerY = 50;
-	private static final double playerX = 200;
-	private static final double gravityForce = 12;
-	
 	private double jumpTime = 0;
 	
+	private AnchorPane root = new AnchorPane(backgroundView, playerView);
+	private Scene scene = new Scene(root);
+	
+	private Scale scale = new Scale();
+	{
+		root.getTransforms().add(scale);
+		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setX(newValue.doubleValue() / width);
+		});
+		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setY(newValue.doubleValue() / height);
+		});
+	}
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -69,9 +87,6 @@ public class Game extends GameState{
 			render(dt);
 		}
 	};
-
-	private AnchorPane root = new AnchorPane(backgroundView);
-	private Scene scene = new Scene(root);
 	
 	private boolean upPressed = false;
 	{
@@ -87,19 +102,7 @@ public class Game extends GameState{
 		main.getStage().setMinWidth(width);
 		main.getStage().setMinHeight(height);
 		main.getStage().setFullScreenExitHint("");
-		main.getStage().setResizable(false);
-		
-//		Scale scale = new Scale();
-//		root.getTransforms().add(scale);
-//		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setX(newValue.doubleValue() / width);
-//		});
-//		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setY(newValue.doubleValue() / height);
-//		});
-
-		root.getChildren().add(playerView);
-		playerView.setLayoutX(playerX);
+		//main.getStage().setResizable(false);
 	}
 	
 	
@@ -123,7 +126,7 @@ public class Game extends GameState{
 	
 	private void addStartTile(){
 		TileView view = Tile.START_TILE.createView();
-		view.setY(200);
+		view.setY(START_TILE_X);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
@@ -176,7 +179,7 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY += gravityForce * dt;
+		playerY += GRAVITY_FORCE * dt;
 		
 		if(playerY >= 167) 
 		{
