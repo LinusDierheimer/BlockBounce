@@ -21,9 +21,11 @@ public class Game extends GameState{
 	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
 	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
-	
+	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
+	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
-	private ImageView playerView = new ImageView(PLAYER_IMAGE);
+	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
+	
 	
 	
 	private static final Random random = new Random();
@@ -178,17 +180,23 @@ public class Game extends GameState{
 		if(playerY >= 167) 
 		{
 			playerY = 167;
+			playerView.setImage(PLAYER_IMAGE);
 		}
 		
 		if(upPressed && playerY == 167) {
 			jumpTime = 25;
 			upPressed = false;
+			playerView.setImage(PLAYERJUMP_IMAGE);
 		}
 		
 		if(jumpTime > 0) {
 			playerY -=6.5;
 			jumpTime --;
+			if(jumpTime == 0) {
+				playerView.setImage(PLAYERLANDING_IMAGE);
+			}
 		}
+		
 	}
 	
 	private void render(double dt) {
