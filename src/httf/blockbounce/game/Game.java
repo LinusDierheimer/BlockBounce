@@ -7,7 +7,6 @@ import java.util.Random;
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
