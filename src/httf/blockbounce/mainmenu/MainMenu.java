@@ -1,7 +1,12 @@
 package httf.blockbounce.mainmenu;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
+import httf.blockbounce.resources.ResourceLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
 public class MainMenu extends GameState{
@@ -12,7 +17,15 @@ public class MainMenu extends GameState{
 
 	@Override
 	public Scene getScene() {
-		return null;
+		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL("mainmenu.fxml"));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
+		MainMenuController controller = loader.getController();
+		controller.main = main;
+		return new Scene(loader.getRoot());
 	}
 
 	@Override
