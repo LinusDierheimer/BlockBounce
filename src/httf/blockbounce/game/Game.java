@@ -31,8 +31,11 @@ public class Game extends GameState{
 	private List<TileView> tiles = new ArrayList<>();
 	
 	private static final double MIN_TILE_DISTANCE = 50;
-	private static final double MAX_TILE_DISTANCE = 150;
-		
+	private static final double MAX_TILE_DISTANCE = 150;	
+	private static double generateDistance() {
+		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
+	}
+	
 	private static final int TILE_SPEED = 15;
 	
 	private AnimationTimer timer = new AnimationTimer() {
@@ -89,15 +92,19 @@ public class Game extends GameState{
 		tiles.remove(view);
 		root.getChildren().remove(view);
 	}
-		
+	
+	private double nextDistance = generateDistance();
+	
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
 			addTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - 50)
+			if(lastTile.rightX() < main.getStage().getWidth() - nextDistance) {
 				addTile();
+				nextDistance = generateDistance();
+			}
 		
 			TileView firstTile = tiles.get(0);
 			if(firstTile.rightX() < 0)
