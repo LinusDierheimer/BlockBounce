@@ -9,16 +9,10 @@ import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Scale;
-import javafx.scene.transform.Transform;
-import javafx.stage.Screen;
 
 public class Game extends GameState{
 	
@@ -30,9 +24,14 @@ public class Game extends GameState{
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	
 	private static final Random random = new Random();
-
+	private static final double randDouble(double min, double max) {
+		return random.nextDouble() * (max - min) + min;
+	}
+	
 	private List<TileView> tiles = new ArrayList<>();
-	private static final double MIN_DISTANCE = 50;
+	
+	private static final double MIN_TILE_DISTANCE = 50;
+	private static final double MAX_TILE_DISTANCE = 150;
 		
 	private static final int TILE_SPEED = 15;
 	
@@ -48,7 +47,6 @@ public class Game extends GameState{
 			
 			update(dt);
 			render(dt);
-			System.out.println(dt);
 		}
 	};
 
@@ -91,14 +89,14 @@ public class Game extends GameState{
 		tiles.remove(view);
 		root.getChildren().remove(view);
 	}
-	
+		
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
 			addTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - MIN_DISTANCE)
+			if(lastTile.rightX() < main.getStage().getWidth() - 50)
 				addTile();
 		
 			TileView firstTile = tiles.get(0);
