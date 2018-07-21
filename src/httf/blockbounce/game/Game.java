@@ -97,7 +97,7 @@ public class Game extends GameState{
 	private boolean upPressed = false;
 	{
 		scene.setOnKeyPressed(e -> {
-			if(e.getCode() == KeyCode.UP)
+			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = true;
 		});
 	}
@@ -251,7 +251,7 @@ public class Game extends GameState{
 	}
 	
 	private void renderPlayer(double dt) {
-		playerView.setLayoutY(playerY);
+		playerView.setLayoutY(playerY  - playerView.getImage().getHeight());
 	}
 	
 	@Override

@@ -28,7 +28,7 @@ abstract class Tile extends Image{
 			new Tile("tile2.png") {
 				@Override
 				public double getHeight(double x){
-					return 80;
+					return 96;
 				}
 			}
 	);
