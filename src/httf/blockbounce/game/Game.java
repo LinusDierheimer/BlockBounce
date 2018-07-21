@@ -29,7 +29,9 @@ public class Game extends GameState{
 	
 	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
+
 	private Label scoreLabel = new Label("Score: 0");
+
 	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
@@ -186,13 +188,14 @@ public class Game extends GameState{
 				
 		for(TileView tile : tiles) {
 			
-			if(screenX < tile.getX())
+			if(screenX < tile.getLayoutX())
 				return -1;
 			
-			if(screenX > tile.getX() + tile.getTile().getWidth())
+			if(screenX > tile.getLayoutX() + tile.getTile().getWidth())
 				continue;
-			else
-				return tile.getTopHeight((int) (screenX - tile.getX()));
+			else {
+				return tile.getTopHeight(screenX - tile.getLayoutX());
+			}
 			
 		}
 		
@@ -243,7 +246,6 @@ public class Game extends GameState{
 	
 	private void renderPlayer(double dt) {
 		playerView.setLayoutY(playerY);
-		
 	}
 	
 	@Override

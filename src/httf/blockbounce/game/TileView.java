@@ -20,7 +20,7 @@ public class TileView extends ImageView{
 		return getLayoutX() + getImage().getWidth();
 	}
 	
-	public double getTopHeight(int x) {
+	public double getTopHeight(double x) {
 		return getLayoutY() - getTile().getHeight() + getTile().getHeight(x);
 	}
 }
