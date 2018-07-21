@@ -17,11 +17,13 @@ import javafx.scene.layout.AnchorPane;
 public class Game extends GameState{
 	
 	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
-	
+	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
 	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	private ImageView playerView = new ImageView(PLAYER_IMAGE);
+	
 	
 	private static final Random random = new Random();
 	private static final double randDouble(double min, double max) {
@@ -37,6 +39,8 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 15;
+	
+	private int playerY = 50;
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -72,7 +76,9 @@ public class Game extends GameState{
 //		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 //			scale.setY(newValue.doubleValue() / height);
 //		});
+		root.getChildren().add(playerView);
 	}
+	
 	
 	@Override
 	public Scene getScene() {
