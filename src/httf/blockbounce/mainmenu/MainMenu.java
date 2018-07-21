@@ -23,8 +23,10 @@ public class MainMenu extends GameState{
 		} catch (IOException e) {
 			throw new UncheckedIOException(e);
 		}
-		//MainMenuController controller = loader.getController();
-		//controller.main = main;
+		MainMenuController controller = loader.getController();
+		controller.main = main;
+		main.getStage().setTitle("Block Bouncer");
+		main.getStage().setMaximized(true);
 		return new Scene(loader.getRoot());
 	}
 
