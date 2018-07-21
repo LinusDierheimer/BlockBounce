@@ -1,16 +1,29 @@
 package httf.blockbounce.game;
 
 import httf.blockbounce.GameState;
+import httf.blockbounce.Main;
+import httf.blockbounce.resources.ResourceLoader;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 public class Game extends GameState{
 	
-	private Image background;
+	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("backgroud.png");
 	
-	public Game() {
-		super(new AnchorPane());
-		
+	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	
+	private AnchorPane root = new AnchorPane(backgroundView);
+	private Scene scene = new Scene(root);
+	
+	public Game(Main main) {
+		super(main);
+	}
+	
+	@Override
+	public Scene getScene() {
+		return scene;
 	}
 	
 }
