@@ -16,9 +16,12 @@ import javafx.scene.layout.AnchorPane;
 public class Game extends GameState{
 	
 	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
-	private static final List<Image> TILES = new ArrayList<>(1);
+	
+	private static final int NUMBER_OF_TILES = 25;
+	private static final List<Image> TILES = new ArrayList<>(25);
 	static {
-		//TILES.add(ResourceLoader.loadAsImage("tile1.jpg"));
+		for(int i = 1; i <= NUMBER_OF_TILES; i++)
+			TILES.add(ResourceLoader.loadAsImage("tile" + i + ".png"));
 	}
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
