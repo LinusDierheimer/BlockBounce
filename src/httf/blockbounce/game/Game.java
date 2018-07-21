@@ -213,6 +213,7 @@ public class Game extends GameState{
 	}
 	private void updatePlayer(double dt) {
 		double floorY = getHeight(START_TILE_X);
+
 		
 		if(floorY == 0) {
 			return;
