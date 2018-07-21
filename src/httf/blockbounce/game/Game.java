@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class Game extends GameState{
 	
@@ -28,9 +29,9 @@ public class Game extends GameState{
 	
 	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
-	
-	private Label scoreLabel = new Label("0");
-	
+
+	private Label scoreLabel = new Label("Score: 0");
+
 	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
@@ -63,6 +64,7 @@ public class Game extends GameState{
 	
 	private double playerY = 50;
 	private double jumpTime = 0;
+	private double score = 0;
 	
 	private AnchorPane root = new AnchorPane(backgroundView, playerView);
 	private Scene scene = new Scene(root);
@@ -163,6 +165,12 @@ public class Game extends GameState{
 		}
 		
 	}
+	private void renderScore(double dt) {
+		
+		long roundedScore = Math.round(score);
+		scoreLabel.setText("Score: " + roundedScore);
+		
+	}
 	
 	private void renderTiles(double dt) {
 		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
@@ -197,8 +205,12 @@ public class Game extends GameState{
 	private void update(double dt) {
 		updateTiles(dt);
 		updatePlayer(dt);
+		updateScore(dt);
 	}
-	
+	private void updateScore(double dt) {
+		score += 0.05;
+		
+	}
 	private void updatePlayer(double dt) {
 		
 		double floorY = getHeight(START_TILE_X);
@@ -228,6 +240,7 @@ public class Game extends GameState{
 	private void render(double dt) {
 		renderTiles(dt);
 		renderPlayer(dt);
+		renderScore(dt);
 	}
 	
 	private void renderPlayer(double dt) {
@@ -239,8 +252,11 @@ public class Game extends GameState{
 		timer.start();
 	}
 	private void initLabel() {
-		//scoreLabel.setLayoutX(root.getWidth()- 30 - scoreLabel.getWidth());
+		
+		scoreLabel.setLayoutX(30);
 		scoreLabel.setLayoutY(20);
+		//scoreLabel.setMinWidth(root.getWidth()- 30);
+		//scoreLabel.setTextAlignment(TextAlignment.RIGHT);
 		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
 		scoreLabel.setFont(new Font("Impact", 25));
 	}
