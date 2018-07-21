@@ -38,6 +38,9 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
+	private static final double MIN_TILE_HEIGHT = 100;
+	private static final
+	
 	private static final int TILE_SPEED = 20;
 	
 	private double playerY = 50;
@@ -114,7 +117,6 @@ public class Game extends GameState{
 	}
 	
 	private double nextDistance = generateDistance();
-	
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
@@ -137,6 +139,18 @@ public class Game extends GameState{
 		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
 	}
 	
+	/**
+	 * 
+	 * Returns the height of the tile at the given screen position.
+	 * If there is no tile, a negative number will be returned.
+	 * 
+	 * @param screenX
+	 * @return
+	 */
+	public double getHeight(double screenX) {
+		return -1;
+	}
+	
 	private void update(double dt) {
 		updateTiles(dt);
 		updatePlayer(dt);
@@ -152,6 +166,7 @@ public class Game extends GameState{
 			playerY = 167;
 		}
 	}
+	
 	private void render(double dt) {
 		renderTiles(dt);
 		renderPlayer(dt);
