@@ -9,6 +9,13 @@ import javafx.scene.image.Image;
 
 abstract class Tile extends Image{
 
+	public static final Tile START_TILE = new Tile("starttile.png") {
+		@Override
+		public int getHeight(int x) {
+			return 80;
+		}
+	};
+	
 	public static final List<Tile> TILES = Arrays.asList(
 			
 			new Tile("tile1.png") {

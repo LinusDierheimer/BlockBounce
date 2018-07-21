@@ -38,7 +38,13 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
-	private static final int TILE_SPEED = 15;
+	private static final double MIN_TILE_HEIGHT = 300;
+	private static final double MAX_TILE_HEIGHT = 400;
+	private static double generateTileHeight() {
+		return randDouble(MIN_TILE_HEIGHT, MAX_TILE_HEIGHT);
+	}
+	
+	private static final int TILE_SPEED = 20;
 	
 	private double playerY = 50;
 	
@@ -49,14 +55,14 @@ public class Game extends GameState{
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
-		long old = System.currentTimeMillis();
+		long old = System.nanoTime();
 		
 		@Override
 		public void handle(long now) {
 			
 			double dt = (now - old) / 100000000.0;
 			old = now;
-			
+						
 			update(dt);
 			render(dt);
 		}
@@ -81,6 +87,7 @@ public class Game extends GameState{
 //		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 //			scale.setY(newValue.doubleValue() / height);
 //		});
+
 		root.getChildren().add(playerView);
 		playerView.setLayoutX(200);
 	}
@@ -91,11 +98,22 @@ public class Game extends GameState{
 		return scene;
 	}
 	
+	private void addTile(Tile tile) {
+		TileView view = tile.createView();
+		view.setLayoutY(generateTileHeight());
+		view.setLayoutX(width);
+		tiles.add(view);
+		root.getChildren().add(view);
+	}
+	
 	private void addTile() {
 		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
-		TileView view = randomTile.createView();
-		view.setLayoutY(200);
-		view.setLayoutX(width);
+		addTile(randomTile);
+	}
+	
+	private void addStartTile(){
+		TileView view = Tile.START_TILE.createView();
+		view.setY(200);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
@@ -106,11 +124,10 @@ public class Game extends GameState{
 	}
 	
 	private double nextDistance = generateDistance();
-	
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
-			addTile();
+			addStartTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
 			if(lastTile.rightX() < main.getStage().getWidth() - nextDistance) {
@@ -129,6 +146,18 @@ public class Game extends GameState{
 		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
 	}
 	
+	/**
+	 * 
+	 * Returns the height of the tile at the given screen position.
+	 * If there is no tile, a negative number will be returned.
+	 * 
+	 * @param screenX
+	 * @return
+	 */
+	public double getHeight(double screenX) {
+		return -1;
+	}
+	
 	private void update(double dt) {
 		updateTiles(dt);
 		updatePlayer(dt);
@@ -137,7 +166,7 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY +=2.5;		//todo dt einbeziehen
+		playerY += 12 * dt;
 		
 		if(playerY >= 167) 
 		{
@@ -156,6 +185,7 @@ public class Game extends GameState{
 			jumpTime --;
 		}
 	}
+	
 	private void render(double dt) {
 		renderTiles(dt);
 		renderPlayer(dt);
