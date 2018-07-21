@@ -1,6 +1,6 @@
 package httf.blockbounce;
 	
-import httf.blockbounce.mainmenu.MainMenu;
+import httf.blockbounce.game.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,7 +22,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception{
 		this.stage = stage;
-		setGameState(new MainMenu(this));
+		setGameState(new Game(this));
 		this.stage.show();
 	}
 	
