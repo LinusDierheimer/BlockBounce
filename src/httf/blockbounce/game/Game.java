@@ -9,11 +9,14 @@ import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Scale;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class Game extends GameState{
 	
@@ -25,7 +28,7 @@ public class Game extends GameState{
 	
 	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
-	
+	private Label scoreLabel = new Label("0");
 	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
@@ -105,6 +108,8 @@ public class Game extends GameState{
 		//main.getStage().setResizable(false);
 		
 		System.out.println(root.getWidth());
+		root.getChildren().add(scoreLabel);
+		initLabel();
 	}
 	
 	
@@ -231,5 +236,11 @@ public class Game extends GameState{
 	@Override
 	public void run() {
 		timer.start();
+	}
+	private void initLabel() {
+		//scoreLabel.setLayoutX(root.getWidth()- 30 - scoreLabel.getWidth());
+		scoreLabel.setLayoutY(20);
+		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
+		scoreLabel.setFont(new Font("Impact", 25));
 	}
 }
