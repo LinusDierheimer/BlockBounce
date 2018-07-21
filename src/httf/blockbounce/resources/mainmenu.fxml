@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.mainmenu.MainMenuController">
    <top>
       <AnchorPane prefHeight="147.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="both" layoutX="278.0" layoutY="12.0" text="Hauptmenü">
+            <Label fx:id="both" layoutX="278.0" layoutY="12.0" text="Pixel Bounce">
                <font>
                   <Font name="Freehand521 BT" size="96.0" />
                </font>
@@ -24,9 +23,29 @@
    <center>
       <AnchorPane prefHeight="556.0" prefWidth="1084.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="gameImage" fitHeight="640.0" fitWidth="1084.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="654.0" fitWidth="1079.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@plx-1.png" />
+                  <Image url="@background.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="182.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@idle.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="633.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@ledge%20grab.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="943.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@run.gif" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="515.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@run.gif" />
                </image>
             </ImageView>
          </children>
