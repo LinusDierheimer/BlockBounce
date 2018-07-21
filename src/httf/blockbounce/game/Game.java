@@ -23,12 +23,12 @@ public class Game extends GameState{
 	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
 	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
 	
-	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
-	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
+	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
+	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
 	
-	private static final Random random = new Random();
+	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
-		return random.nextDouble() * (max - min) + min;
+		return RANDOM.nextDouble() * (max - min) + min;
 	}
 	
 	private List<TileView> tiles = new ArrayList<>();
@@ -66,10 +66,10 @@ public class Game extends GameState{
 	{
 		root.getTransforms().add(scale);
 		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setX(newValue.doubleValue() / width);
+			scale.setX(newValue.doubleValue() / WIDTH);
 		});
 		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setY(newValue.doubleValue() / height);
+			scale.setY(newValue.doubleValue() / HEIGHT);
 		});
 	}
 	
@@ -99,10 +99,12 @@ public class Game extends GameState{
 	public Game(Main main) {
 		super(main);
 		//main.getStage().setMaximized(true);
-		main.getStage().setMinWidth(width);
-		main.getStage().setMinHeight(height);
+		main.getStage().setMinWidth(WIDTH);
+		main.getStage().setMinHeight(HEIGHT);
 		main.getStage().setFullScreenExitHint("");
 		//main.getStage().setResizable(false);
+		
+		System.out.println(root.getWidth());
 	}
 	
 	
@@ -114,13 +116,13 @@ public class Game extends GameState{
 	private void addTile(Tile tile) {
 		TileView view = tile.createView();
 		view.setLayoutY(generateTileHeight() + view.getTile().getHeight());
-		view.setLayoutX(width);
+		view.setLayoutX(WIDTH);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
 	
 	private void addTile() {
-		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
+		Tile randomTile = Tile.TILES.get(RANDOM.nextInt(Tile.TILES.size()));
 		addTile(randomTile);
 	}
 	
