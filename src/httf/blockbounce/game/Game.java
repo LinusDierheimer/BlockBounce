@@ -32,8 +32,10 @@ public class Game extends GameState{
 	private static final Random random = new Random();
 
 	private List<TileView> tiles = new ArrayList<>();
-	private static final double MIN_DISTANCE = 30;
+	private static final double MIN_DISTANCE = 50;
 		
+	private static final int TILE_SPEED = 15;
+	
 	private AnimationTimer timer = new AnimationTimer() {
 		
 		long old = System.currentTimeMillis();
@@ -46,6 +48,7 @@ public class Game extends GameState{
 			
 			update(dt);
 			render(dt);
+			System.out.println(dt);
 		}
 	};
 
@@ -54,19 +57,20 @@ public class Game extends GameState{
 	
 	public Game(Main main) {
 		super(main);
-		main.getStage().setFullScreen(true);
+		//main.getStage().setMaximized(true);
 		main.getStage().setMinWidth(width);
 		main.getStage().setMinHeight(height);
 		main.getStage().setFullScreenExitHint("");
+		main.getStage().setResizable(false);
 		
-		Scale scale = new Scale();
-		root.getTransforms().add(scale);
-		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setX(newValue.doubleValue() / width);
-		});
-		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setY(newValue.doubleValue() / height);
-		});
+//		Scale scale = new Scale();
+//		root.getTransforms().add(scale);
+//		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+//			scale.setX(newValue.doubleValue() / width);
+//		});
+//		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+//			scale.setY(newValue.doubleValue() / height);
+//		});
 	}
 	
 	@Override
@@ -77,6 +81,7 @@ public class Game extends GameState{
 	private void addTile() {
 		Tile randomTile = Tile.TILES.get(random.nextInt(Tile.TILES.size()));
 		TileView view = randomTile.createView();
+		view.setLayoutY(200);
 		view.setLayoutX(width);
 		tiles.add(view);
 		root.getChildren().add(view);
@@ -93,7 +98,7 @@ public class Game extends GameState{
 			addTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - 350)
+			if(lastTile.rightX() < main.getStage().getWidth() - MIN_DISTANCE)
 				addTile();
 		
 			TileView firstTile = tiles.get(0);
@@ -104,7 +109,7 @@ public class Game extends GameState{
 	}
 	
 	private void renderTiles(double dt) {
-		tiles.forEach(e -> e.moveLeft(50 * dt));
+		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
 	}
 	
 	private void update(double dt) {
