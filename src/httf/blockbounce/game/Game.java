@@ -50,6 +50,7 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	
 	private double playerY = 50;
+	private static final double playerX = 200;
 	
 	private double jumpTime = 0;
 	
@@ -98,7 +99,7 @@ public class Game extends GameState{
 //		});
 
 		root.getChildren().add(playerView);
-		playerView.setLayoutX(200);
+		playerView.setLayoutX(playerX);
 	}
 	
 	
