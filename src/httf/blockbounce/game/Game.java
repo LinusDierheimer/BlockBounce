@@ -11,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
 public class Game extends GameState{
@@ -19,9 +20,11 @@ public class Game extends GameState{
 	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
 	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
-	
+	private static final Image PLAYERJUMP_IMAGE = ResourceLoader.loadAsImage("jump.png");
+	private static final Image PLAYERLANDING_IMAGE = ResourceLoader.loadAsImage("landing.png");
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
-	private ImageView playerView = new ImageView(PLAYER_IMAGE);
+	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
+	
 	
 	
 	private static final Random random = new Random();
@@ -46,10 +49,10 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	
 	private double playerY = 50;
+	private static final double playerX = 200;
+	private static final double gravityForce = 12;
 	
 	private double jumpTime = 0;
-	
-	private double jumpTaste = 100;
 	
 	
 	private AnimationTimer timer = new AnimationTimer() {
@@ -70,6 +73,14 @@ public class Game extends GameState{
 	private AnchorPane root = new AnchorPane(backgroundView);
 	private Scene scene = new Scene(root);
 	
+	private boolean upPressed = false;
+	{
+		scene.setOnKeyPressed(e -> {
+			if(e.getCode() == KeyCode.UP)
+				upPressed = true;
+		});
+	}
+	
 	public Game(Main main) {
 		super(main);
 		//main.getStage().setMaximized(true);
@@ -88,7 +99,7 @@ public class Game extends GameState{
 //		});
 
 		root.getChildren().add(playerView);
-		playerView.setLayoutX(200);
+		playerView.setLayoutX(playerX);
 	}
 	
 	
@@ -165,24 +176,28 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY += 12 * dt;
+		playerY += gravityForce * dt;
 		
 		if(playerY >= 167) 
 		{
 			playerY = 167;
+			playerView.setImage(PLAYER_IMAGE);
 		}
-		if(jumpTaste > 0) {
-			jumpTaste --;
-		}
-		if(jumpTaste == 0) {
+		
+		if(upPressed && playerY == 167) {
 			jumpTime = 25;
-			jumpTaste = 100;
+			upPressed = false;
+			playerView.setImage(PLAYERJUMP_IMAGE);
 		}
 		
 		if(jumpTime > 0) {
 			playerY -=6.5;
 			jumpTime --;
+			if(jumpTime == 0) {
+				playerView.setImage(PLAYERLANDING_IMAGE);
+			}
 		}
+		
 	}
 	
 	private void render(double dt) {
