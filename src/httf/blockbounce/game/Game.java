@@ -51,6 +51,7 @@ public class Game extends GameState{
 	
 	private double playerY = 50;
 	private static final double playerX = 200;
+	private static final double gravityForce = 12;
 	
 	private double jumpTime = 0;
 	
@@ -176,7 +177,7 @@ public class Game extends GameState{
 	private void updatePlayer(double dt) {
 		
 			
-		playerY += 12 * dt;
+		playerY += gravityForce * dt;
 		
 		if(playerY >= 167) 
 		{
