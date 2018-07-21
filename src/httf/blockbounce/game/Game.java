@@ -78,7 +78,7 @@ public class Game extends GameState{
 //			scale.setY(newValue.doubleValue() / height);
 //		});
 		root.getChildren().add(playerView);
-		playerView.setLayoutX(120);
+		playerView.setLayoutX(200);
 	}
 	
 	
@@ -131,7 +131,14 @@ public class Game extends GameState{
 	}
 	
 	private void updatePlayer(double dt) {
-		playerY +=2;		//todo dt einbeziehen
+		
+			
+		playerY +=2.5;		//todo dt einbeziehen
+		
+		if(playerY >= 167) 
+		{
+			playerY = 167;
+		}
 	}
 	private void render(double dt) {
 		renderTiles(dt);
