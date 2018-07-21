@@ -6,6 +6,7 @@ import java.util.Random;
 
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
+import httf.blockbounce.endscreen.EndScreen;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -59,7 +60,7 @@ public class Game extends GameState{
 		playerView.setLayoutX(START_TILE_X);
 	}
 	
-	private static final double GRAVITY_FORCE = 12;
+	private static final double GRAVITY_FORCE = 20;
 	
 	private double playerY = 50;
 	private double jumpTime = 0;
@@ -217,7 +218,10 @@ public class Game extends GameState{
 		if(floorY == 0) {
 			return;
 		}
-		
+		if(playerY < main.getStage().getWidth()) {
+			timer.stop();
+			main.setGameState(new EndScreen(main));
+		}
 		playerY += GRAVITY_FORCE * dt;
 		System.out.println("f:" + floorY + ", p" + playerY);
 		if(floorY > - 1) {
