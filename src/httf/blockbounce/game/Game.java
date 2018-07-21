@@ -12,6 +12,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 
 public class Game extends GameState{
@@ -50,8 +51,6 @@ public class Game extends GameState{
 	
 	private double jumpTime = 0;
 	
-	private double jumpTaste = 100;
-	
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -70,6 +69,14 @@ public class Game extends GameState{
 
 	private AnchorPane root = new AnchorPane(backgroundView);
 	private Scene scene = new Scene(root);
+	
+	private boolean upPressed = false;
+	{
+		scene.setOnKeyPressed(e -> {
+			if(e.getCode() == KeyCode.UP)
+				upPressed = true;
+		});
+	}
 	
 	public Game(Main main) {
 		super(main);
@@ -172,12 +179,10 @@ public class Game extends GameState{
 		{
 			playerY = 167;
 		}
-		if(jumpTaste > 0) {
-			jumpTaste --;
-		}
-		if(jumpTaste == 0) {
+		
+		if(upPressed && playerY == 167) {
 			jumpTime = 25;
-			jumpTaste = 100;
+			upPressed = false;
 		}
 		
 		if(jumpTime > 0) {
