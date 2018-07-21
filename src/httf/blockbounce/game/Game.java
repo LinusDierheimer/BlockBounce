@@ -17,11 +17,13 @@ import javafx.scene.layout.AnchorPane;
 public class Game extends GameState{
 	
 	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
-	
+	private static final Image PLAYER_IMAGE = ResourceLoader.loadAsImage("run.gif");
 	private static final double width = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double height = BACKGROUND_IMAGE.getHeight(); //422
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	private ImageView playerView = new ImageView(PLAYER_IMAGE);
+	
 	
 	private static final Random random = new Random();
 	private static final double randDouble(double min, double max) {
@@ -37,6 +39,9 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 20;
+	
+	private double playerY = 50;
+	
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
@@ -72,8 +77,14 @@ public class Game extends GameState{
 //		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 //			scale.setY(newValue.doubleValue() / height);
 //		});
+<<<<<<< HEAD
 		
+=======
+		root.getChildren().add(playerView);
+		playerView.setLayoutX(200);
+>>>>>>> aa4887d7cd508bc7f9aeca6868112f21cae0c4f0
 	}
+	
 	
 	@Override
 	public Scene getScene() {
@@ -131,10 +142,27 @@ public class Game extends GameState{
 	
 	private void update(double dt) {
 		updateTiles(dt);
+		updatePlayer(dt);
 	}
 	
+	private void updatePlayer(double dt) {
+		
+			
+		playerY +=2.5;		//todo dt einbeziehen
+		
+		if(playerY >= 167) 
+		{
+			playerY = 167;
+		}
+	}
 	private void render(double dt) {
 		renderTiles(dt);
+		renderPlayer(dt);
+	}
+	
+	private void renderPlayer(double dt) {
+		playerView.setLayoutY(playerY);
+		
 	}
 	
 	@Override
