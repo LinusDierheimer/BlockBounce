@@ -15,13 +15,17 @@ import javafx.scene.layout.AnchorPane;
 
 public class Game extends GameState{
 	
-	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.jpg");
+	private static final Image BACKGROUND_IMAGE = ResourceLoader.loadAsImage("background.png");
 	private static final List<Image> TILES = new ArrayList<>(1);
 	static {
 		//TILES.add(ResourceLoader.loadAsImage("tile1.jpg"));
 	}
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
+	{
+		backgroundView.fitWidthProperty().bind(main.getStage().widthProperty());
+		backgroundView.fitHeightProperty().bind(main.getStage().heightProperty());
+	}
 	
 	private AnimationTimer timer = new AnimationTimer() {
 		
