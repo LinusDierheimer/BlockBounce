@@ -39,7 +39,7 @@ public class Game extends GameState{
 	}
 	
 	private static final double MIN_TILE_HEIGHT = 100;
-	private static final
+	private static final double MAX_TILE_HEIGHT = 400;
 	
 	private static final int TILE_SPEED = 20;
 	
