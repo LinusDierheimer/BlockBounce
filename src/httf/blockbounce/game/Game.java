@@ -38,8 +38,11 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
-	private static final double MIN_TILE_HEIGHT = 100;
+	private static final double MIN_TILE_HEIGHT = 300;
 	private static final double MAX_TILE_HEIGHT = 400;
+	private static double generateTileHeight() {
+		return randDouble(MIN_TILE_HEIGHT, MAX_TILE_HEIGHT);
+	}
 	
 	private static final int TILE_SPEED = 20;
 	
@@ -93,7 +96,7 @@ public class Game extends GameState{
 	
 	private void addTile(Tile tile) {
 		TileView view = tile.createView();
-		view.setLayoutY(200);
+		view.setLayoutY(generateTileHeight());
 		view.setLayoutX(width);
 		tiles.add(view);
 		root.getChildren().add(view);
