@@ -11,7 +11,7 @@ abstract class Tile extends Image{
 
 	public static final Tile START_TILE = new Tile("starttile.png") {
 		@Override
-		public int getHeight(int x) {
+		public double getHeight(double x) {
 			return 80;
 		}
 	};
@@ -20,14 +20,14 @@ abstract class Tile extends Image{
 			
 			new Tile("tile1.png") {
 				@Override
-				public int getHeight(int x) {
+				public double getHeight(double x) {
 					return 80;
 				}
 			},
 			
 			new Tile("tile2.png") {
 				@Override
-				public int getHeight(int x){
+				public double getHeight(double x){
 					return 80;
 				}
 			}
@@ -41,5 +41,5 @@ abstract class Tile extends Image{
 		return new TileView(this);
 	}
 	
-	public abstract int getHeight(int x);
+	public abstract double getHeight(double x);
 }
