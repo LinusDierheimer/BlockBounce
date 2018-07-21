@@ -129,6 +129,12 @@ public class Game extends GameState{
 	
 	private void render(double dt) {
 		renderTiles(dt);
+		renderPlayer(dt);
+	}
+	
+	private void renderPlayer(double dt) {
+		playerView.setLayoutY(playerY);
+		
 	}
 	
 	@Override
