@@ -145,7 +145,7 @@ public class Game extends GameState{
 			addStartTile();
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - nextDistance) {
+			if(lastTile.rightX() < main.getStage().getWidth() - (nextDistance * scale.getX())) {
 				addTile();
 				nextDistance = generateDistance();
 			}
@@ -170,6 +170,19 @@ public class Game extends GameState{
 	 * @return
 	 */
 	public double getHeight(double screenX) {
+				
+		for(TileView tile : tiles) {
+			
+			if(screenX < tile.getX())
+				return -1;
+			
+			if(screenX > tile.getX() + tile.getTile().getWidth())
+				continue;
+			else
+				return tile.getTopHeight((int) (screenX - tile.getX()));
+			
+		}
+		
 		return -1;
 	}
 	
