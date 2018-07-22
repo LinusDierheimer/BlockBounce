@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
    <children>
       <Label prefHeight="115.0" prefWidth="640.0" text="Game Over">
          <font>
@@ -18,12 +18,12 @@
       </Label>
       <ImageView fitHeight="359.0" fitWidth="630.0" layoutX="5.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Downloads/BlockBounce-master/bin/httf/blockbounce/resources/background.png" />
+            <Image url="@background.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="452.0" fitWidth="320.0" layoutX="163.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../bin/httf/blockbounce/resources/Snake.png" />
+            <Image url="@Snake.png" />
          </image>
       </ImageView>
       <Button layoutX="51.0" layoutY="228.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" text="Retry" />

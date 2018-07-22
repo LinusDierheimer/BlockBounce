@@ -12,7 +12,7 @@ abstract class Tile extends Image{
 	public static final Tile START_TILE = new Tile("starttile.png") {
 		@Override
 		public double getHeight(double x) {
-			return 80;
+			return 79;
 		}
 	};
 	
