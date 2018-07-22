@@ -55,7 +55,7 @@ public class Game extends GameState{
 
 	private static final double GRAVITY_FORCE = 20;
 	
-	private static final double SCORE_INCREASOR = 0.3;
+	private static final double SCORE_INCREASOR = 0.2;
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
@@ -91,7 +91,7 @@ public class Game extends GameState{
  *		});
  *	}
 */
-	
+ 	
 	private Label scoreLabel = new Label("Score: 0");
 	{
 		scoreLabel.setLayoutX(30);
@@ -131,6 +131,8 @@ public class Game extends GameState{
 		//main.getStage().setMaximized(true);
 		main.getStage().setMaxWidth(WIDTH);
 		main.getStage().setMaxHeight(HEIGHT);
+		main.getStage().setMinWidth(WIDTH);
+		main.getStage().setMinHeight(HEIGHT);
 		main.getStage().setFullScreenExitHint("");
 		main.getStage().setResizable(false);
 		main.getStage().setMaximized(false);
