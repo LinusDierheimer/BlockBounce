@@ -80,16 +80,16 @@ public class Game extends GameState{
 		root.getChildren().add(view);
 	}
 	
-	private Scale scale = new Scale();
-	{
-		root.getTransforms().add(scale);
-		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setX(newValue.doubleValue() / WIDTH);
-		});
-		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-			scale.setY(newValue.doubleValue() / HEIGHT);
-		});
-	}
+//	private Scale scale = new Scale();
+//	{
+//		root.getTransforms().add(scale);
+//		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+//			scale.setX(newValue.doubleValue() / WIDTH);
+//		});
+//		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+//			scale.setY(newValue.doubleValue() / HEIGHT);
+//		});
+//	}
 	
 	private Label scoreLabel = new Label("Score: 0");
 	{
@@ -128,8 +128,8 @@ public class Game extends GameState{
 	public Game(Main main) {
 		super(main);
 		//main.getStage().setMaximized(true);
-		main.getStage().setMinWidth(WIDTH);
-		main.getStage().setMinHeight(HEIGHT);
+		main.getStage().setMaxWidth(WIDTH);
+		main.getStage().setMaxHeight(HEIGHT);
 		main.getStage().setFullScreenExitHint("");
 		main.getStage().setResizable(false);
 		main.getStage().setMaximized(false);
@@ -183,7 +183,7 @@ public class Game extends GameState{
 			addTile(); //should never happen
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - (nextDistance * scale.getX())) {
+			if(lastTile.rightX() < main.getStage().getWidth() - (nextDistance)) {
 				addTile();
 				nextDistance = generateDistance();
 			}
