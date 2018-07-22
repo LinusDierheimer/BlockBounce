@@ -31,7 +31,7 @@ public class Game extends GameState{
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
 
 	private static final Random RANDOM = new Random();
-	private static final double randDouble(double min, double max) {
+	private static double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
 	}
 		
@@ -53,6 +53,8 @@ public class Game extends GameState{
 	private static final double START_TILE_X = 200;
 
 	private static final double GRAVITY_FORCE = 20;
+	
+	private static final double SCORE_INCREASOR = 0.3;
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
@@ -231,7 +233,7 @@ public class Game extends GameState{
 	}
 	
 	private void updateScore(double dt) {
-		score += 0.05;
+		score += SCORE_INCREASOR * dt;
 	}
 	
 	private void update(double dt) {
