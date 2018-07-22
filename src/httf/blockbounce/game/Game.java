@@ -40,7 +40,7 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
-	private static final double COLLISION_ACCEPTANCE = 5;
+	private static final double COLLISION_ACCEPTANCE = 10;
 	
 	private static final double MIN_TILE_HEIGHT = 100;
 	private static final double MAX_TILE_HEIGHT = 200;
@@ -198,13 +198,12 @@ public class Game extends GameState{
 	
 	private void updatePlayer(double dt) {
 		double floorY = getHeight(PLAYER_X);
-		System.out.println(floorY);
-		
+		System.out.println("1 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
 		if(floorY == 0) {
 			return;
 		}
 		playerY += GRAVITY_FORCE * dt;
-		//if(playerY - floorY <= COLLISION_ACCEPTANCE) {
+		//
 		//	playerY = floorY;// playerView.getImage().getHeight();
 			//playerView.setImage(PLAYER_IMAGE);
 		//}
@@ -214,9 +213,12 @@ public class Game extends GameState{
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
 			{
-				playerY = floorY;	
+				if(playerY - floorY <= COLLISION_ACCEPTANCE) {
+					playerY = floorY;
+				}
 				playerView.setImage(PLAYER_IMAGE);
 			}
+		}
 			
 			if(upPressed && playerY == floorY) {
 				jumpTime = 25;
@@ -231,7 +233,8 @@ public class Game extends GameState{
 					playerView.setImage(PLAYERLANDING_IMAGE);
 				}
 			}
-		}
+		
+		System.out.println("2 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
 		
 	}
 	
