@@ -71,7 +71,10 @@ public class Game extends GameState{
 	
 	private List<TileView> tiles = new ArrayList<>();
 	{
-		
+		TileView view = Tile.START_TILE.createView();
+		view.setY(START_TILE_X);
+		tiles.add(view);
+		root.getChildren().add(view);
 	}
 	
 	private Scale scale = new Scale();
@@ -165,13 +168,6 @@ public class Game extends GameState{
 		addTile(randomTile);
 	}
 	
-	private void addStartTile(){
-		TileView view = Tile.START_TILE.createView();
-		view.setY(START_TILE_X);
-		tiles.add(view);
-		root.getChildren().add(view);
-	}
-	
 	private void removeTile(TileView view) {
 		tiles.remove(view);
 		root.getChildren().remove(view);
@@ -181,7 +177,7 @@ public class Game extends GameState{
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
-			addStartTile();
+			addTile(); //should never happen
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
 			if(lastTile.rightX() < main.getStage().getWidth() - (nextDistance * scale.getX())) {
