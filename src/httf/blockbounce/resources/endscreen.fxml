@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,16 +13,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-=======
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
->>>>>>> 74dd6d3dd9a4d3efbb0177aff55aa45866f9c2dc
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
    <children>
-      <Label prefHeight="115.0" prefWidth="640.0" text="Game Over">
+      <Label alignment="CENTER" prefHeight="115.0" prefWidth="640.0" text="Game Over">
          <font>
-            <Font name="Blade Runner Movie Font" size="95.0" />
+            <Font name="Impact" size="95.0" />
          </font>
       </Label>
       <ImageView fitHeight="359.0" fitWidth="630.0" layoutX="5.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
@@ -25,19 +25,19 @@
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <Button layoutX="75.0" layoutY="216.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" text="Retry" />
       <ImageView fitHeight="452.0" fitWidth="320.0" layoutX="160.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Snake.png" />
          </image>
       </ImageView>
-      <Button layoutX="480.0" layoutY="216.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="99.0" text="Main Menu" />
+      <Button fx:id="retryButton" layoutX="75.0" layoutY="216.0" mnemonicParsing="false" onAction="#retryButtonPressed" prefHeight="49.0" prefWidth="85.0" text="Retry" />
+      <Button fx:id="mainMenuButton" layoutX="480.0" layoutY="216.0" mnemonicParsing="false" onAction="#mainMenuButtonPressed" prefHeight="49.0" prefWidth="99.0" text="Main Menu" />
       <Text layoutX="172.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="84.99999618530273">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Text layoutX="391.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="75.13671875">
+      <Text fx:id="scoreLabel" layoutX="391.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="75.13671875">
          <font>
             <Font size="27.0" />
          </font>

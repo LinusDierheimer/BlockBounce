@@ -8,6 +8,8 @@ import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.transform.Scale;
 
 public class EndScreen extends GameState{
 
@@ -27,7 +29,18 @@ public class EndScreen extends GameState{
 		controller.main = main;
 		main.getStage().setTitle("Block Bouncer");
 		main.getStage().setMaximized(true);
-		return new Scene(loader.getRoot());
+		
+		BorderPane root = new BorderPane(loader.getRoot());
+		Scale scale = new Scale();
+		root.getTransforms().add(scale);
+		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setX(newValue.doubleValue() / root.getWidth());
+		});
+		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+			scale.setY(newValue.doubleValue() / root.getHeight());
+		});
+		
+		return new Scene(root);
 	}
 	
 	@Override
