@@ -30,8 +30,9 @@ public class EndScreen extends GameState{
 		Pane root = loader.getRoot();
 		
 		main.getStage().setTitle("Block Bouncer");
-		main.getStage().setWidth(root.getPrefWidth() + 20);
-		main.getStage().setHeight(root.getPrefHeight() + 20);
+		main.getStage().setWidth(655);
+		main.getStage().setHeight(515);
+		main.getStage().setResizable(false);
 		
 		return new Scene(root);
 	}
