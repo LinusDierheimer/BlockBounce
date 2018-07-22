@@ -123,6 +123,12 @@ public class Game extends GameState{
 		scene.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = true;
+			
+		});
+		scene.setOnKeyReleased(e -> {
+			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
+				upPressed = false;
+			
 		});
 	}
 	
@@ -224,8 +230,11 @@ public class Game extends GameState{
 			
 			if(upPressed && playerY == floorY) {
 				jumpTime = 40;
-				upPressed = false;
+				//upPressed = false;
 				playerView.setImage(PLAYERJUMP_IMAGE);
+			}
+			if(upPressed == false) {
+				jumpTime = 0;
 			}
 			
 			if(jumpTime > 0) {
