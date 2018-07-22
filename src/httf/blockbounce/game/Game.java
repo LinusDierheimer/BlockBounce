@@ -50,7 +50,9 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 20;
-	private static final double START_TILE_X = 200;
+	private static final double START_TILE_Y = 200;
+	private static final double START_TILE_X = 0;
+	private static final double PLAYER_Y = 50;
 
 	private static final double GRAVITY_FORCE = 20;
 	
@@ -59,7 +61,7 @@ public class Game extends GameState{
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
-		playerView.setLayoutX(START_TILE_X + playerView.getImage().getHeight());
+		playerView.setLayoutX(START_TILE_Y + playerView.getImage().getHeight());
 	}
 				
 	private double playerY = 50;
@@ -72,7 +74,8 @@ public class Game extends GameState{
 	private List<TileView> tiles = new ArrayList<>();
 	{
 		TileView view = Tile.START_TILE.createView();
-		view.setY(START_TILE_X);
+		view.setLayoutY(START_TILE_Y);
+		view.setLayoutX(START_TILE_X);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
@@ -193,8 +196,8 @@ public class Game extends GameState{
 	}
 	
 	private void updatePlayer(double dt) {
-		double floorY = getHeight(START_TILE_X);
-
+		double floorY = getHeight(PLAYER_Y);
+		System.out.println(floorY);
 		
 		if(floorY == 0) {
 			return;
