@@ -52,7 +52,7 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	private static final double START_TILE_Y = 200;
 	private static final double START_TILE_X = 0;
-	private static final double PLAYER_Y = 50;
+	private static final double PLAYER_X = 50;
 
 	private static final double GRAVITY_FORCE = 20;
 	
@@ -196,7 +196,7 @@ public class Game extends GameState{
 	}
 	
 	private void updatePlayer(double dt) {
-		double floorY = getHeight(PLAYER_Y);
+		double floorY = getHeight(PLAYER_X);
 		System.out.println(floorY);
 		
 		if(floorY == 0) {
