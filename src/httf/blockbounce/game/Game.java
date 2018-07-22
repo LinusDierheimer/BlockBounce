@@ -79,16 +79,18 @@ public class Game extends GameState{
 		root.getChildren().add(view);
 	}
 	
-//	private Scale scale = new Scale();
-//	{
-//		root.getTransforms().add(scale);
-//		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setX(newValue.doubleValue() / WIDTH);
-//		});
-//		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
-//			scale.setY(newValue.doubleValue() / HEIGHT);
-//		});
-//	}
+/*	
+ *	private Scale scale = new Scale();
+ *	{
+ *		root.getTransforms().add(scale);
+ *		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+ *			scale.setX(newValue.doubleValue() / WIDTH);
+ *		});
+ *		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+ *			scale.setY(newValue.doubleValue() / HEIGHT);
+ *		});
+ *	}
+*/
 	
 	private Label scoreLabel = new Label("Score: 0");
 	{
