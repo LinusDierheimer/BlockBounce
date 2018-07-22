@@ -12,8 +12,11 @@ import javafx.scene.layout.Pane;
 
 public class EndScreen extends GameState{
 
-	public EndScreen(Main main) {
+	private final double score;
+	
+	public EndScreen(Main main, double score) {
 		super(main);
+		this.score = score;
 	}
 
 	@Override
@@ -26,6 +29,7 @@ public class EndScreen extends GameState{
 		}
 		EndScreenController controller = loader.getController();
 		controller.main = main;
+		controller.scoreLabel.setText("" +Math.round(score));
 		
 		Pane root = loader.getRoot();
 		

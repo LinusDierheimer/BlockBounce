@@ -20,7 +20,7 @@ public class EndScreenController {
     private URL location;
 
     @FXML // fx:id="scoreLabel"
-    private Text scoreLabel; // Value injected by FXMLLoader
+    Text scoreLabel; // Value injected by FXMLLoader
 
     @FXML // fx:id="mainMenuButton"
     private Button mainMenuButton; // Value injected by FXMLLoader

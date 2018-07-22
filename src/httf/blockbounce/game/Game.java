@@ -211,7 +211,7 @@ public class Game extends GameState{
 			//playerView.setImage(PLAYER_IMAGE);
 		//}
 		if(playerY > main.getStage().getHeight()) {
-			stop();
+			stop(score);
 		}
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
@@ -268,9 +268,9 @@ public class Game extends GameState{
 		renderScore(dt);
 	}
 	
-	public void stop() {
+	public void stop(double score) {
 		timer.stop();
-		main.setGameState(new EndScreen(main));
+		main.setGameState(new EndScreen(main, score));
 	}
 	
 	@Override

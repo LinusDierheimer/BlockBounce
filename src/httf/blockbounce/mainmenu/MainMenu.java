@@ -8,7 +8,6 @@ import httf.blockbounce.Main;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 public class MainMenu extends GameState{
 
@@ -27,8 +26,9 @@ public class MainMenu extends GameState{
 		MainMenuController controller = loader.getController();
 		controller.main = main;
 		
-		BorderPane root = new BorderPane(loader.getRoot());		
-		return new Scene(root);
+		//main.getStage().setResizable(false);
+		
+		return new Scene(loader.getRoot());
 	}
 
 	@Override
