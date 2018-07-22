@@ -61,9 +61,7 @@ public class Game extends GameState{
 	{
 		playerView.setLayoutX(START_TILE_X + playerView.getImage().getHeight());
 	}
-	
-	private List<TileView> tiles = new ArrayList<>();
-			
+				
 	private double playerY = 50;
 	private double jumpTime = 0;
 	private double score = 0;
