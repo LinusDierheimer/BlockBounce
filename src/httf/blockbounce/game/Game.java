@@ -31,7 +31,7 @@ public class Game extends GameState{
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
 
 	private static final Random RANDOM = new Random();
-	private static final double randDouble(double min, double max) {
+	private static double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
 	}
 		
