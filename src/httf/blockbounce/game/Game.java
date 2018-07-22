@@ -35,7 +35,7 @@ public class Game extends GameState{
 	}
 		
 	private static final double MIN_TILE_DISTANCE = 50;
-	private static final double MAX_TILE_DISTANCE = 150;	
+	private static final double MAX_TILE_DISTANCE = 100;	
 	private static double generateDistance() {
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
@@ -51,7 +51,7 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	private static final double START_TILE_Y = 200;
 	private static final double START_TILE_X = 0;
-	private static final double PLAYER_X = 50;
+	private static final double PLAYER_X = 100;
 
 	private static final double GRAVITY_FORCE = 20;
 	
