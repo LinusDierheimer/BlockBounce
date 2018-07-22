@@ -205,18 +205,18 @@ public class Game extends GameState{
 		if(floorY == 0) {
 			return;
 		}
-		if(playerY - floorY <= COLLISION_ACCEPTANCE) {
-			playerY = floorY - playerView.getImage().getHeight();
-			playerView.setImage(PLAYER_IMAGE);
-		}
+		playerY += GRAVITY_FORCE * dt;
+		//if(playerY - floorY <= COLLISION_ACCEPTANCE) {
+		//	playerY = floorY;// playerView.getImage().getHeight();
+			//playerView.setImage(PLAYER_IMAGE);
+		//}
 		if(playerY > main.getStage().getHeight()) {
 			stop();
 		}
-		playerY += GRAVITY_FORCE * dt;
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
 			{
-				
+				playerY = floorY;	
 				playerView.setImage(PLAYER_IMAGE);
 			}
 			
