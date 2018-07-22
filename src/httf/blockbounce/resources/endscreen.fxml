@@ -8,7 +8,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<<<<<<< HEAD
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+=======
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
+>>>>>>> 74dd6d3dd9a4d3efbb0177aff55aa45866f9c2dc
    <children>
       <Label prefHeight="115.0" prefWidth="640.0" text="Game Over">
          <font>
@@ -23,7 +28,7 @@
       <Button layoutX="75.0" layoutY="216.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" text="Retry" />
       <ImageView fitHeight="452.0" fitWidth="320.0" layoutX="160.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../bin/httf/blockbounce/resources/Snake.png" />
+            <Image url="@Snake.png" />
          </image>
       </ImageView>
       <Button layoutX="480.0" layoutY="216.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="99.0" text="Main Menu" />

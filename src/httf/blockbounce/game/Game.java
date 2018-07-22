@@ -71,6 +71,11 @@ public class Game extends GameState{
 	private AnchorPane root = new AnchorPane(backgroundView, playerView);
 	private Scene scene = new Scene(root);
 	
+	private List<TileView> tiles = new ArrayList<>();
+	{
+		
+	}
+	
 	private Scale scale = new Scale();
 	{
 		root.getTransforms().add(scale);
