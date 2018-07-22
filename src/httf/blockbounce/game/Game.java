@@ -58,8 +58,13 @@ public class Game extends GameState{
 		playerView.setLayoutX(START_TILE_X + playerView.getImage().getHeight());
 	}
 	
+<<<<<<< HEAD
 	private List<TileView> tiles = new ArrayList<>();
 		
+=======
+	private static final double GRAVITY_FORCE = 20;
+	
+>>>>>>> c71b662ded292582d7217a9c3bf498f55415bcf0
 	private double playerY = 50;
 	private double jumpTime = 0;
 	private double score = 0;
@@ -196,7 +201,10 @@ public class Game extends GameState{
 		if(floorY == 0) {
 			return;
 		}
-		
+		if(playerY < main.getStage().getWidth()) {
+			timer.stop();
+			main.setGameState(new EndScreen(main));
+		}
 		playerY += GRAVITY_FORCE * dt;
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
