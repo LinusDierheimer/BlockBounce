@@ -37,6 +37,34 @@ abstract class Tile extends Image{
 				public double getHeight(double x) {
 					return 48;
 				}
+			},
+			
+			new Tile("tile4.png") {
+				@Override
+				public double getHeight(double x) {
+					return 32;
+				}
+			},
+			
+			new Tile("tile5.png") {
+				@Override
+				public double getHeight(double x) {
+					return 46;
+				}
+			},
+			
+			new Tile("tile6.png") {
+				@Override
+				public double getHeight(double x) {
+					return 80;
+				}
+			},
+			
+			new Tile("tile7.png") {
+				@Override
+				public double getHeight(double x) {
+					return 32;
+				}
 			}
 	);
 	
