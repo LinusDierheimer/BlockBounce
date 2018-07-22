@@ -273,7 +273,7 @@ public class Game extends GameState{
 	
 	public void stop() {
 		timer.stop();
-		main.setGameState(new EndScreen(main));
+		main.setGameState(new EndScreen(main, score));
 	}
 	
 	@Override

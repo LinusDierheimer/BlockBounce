@@ -1,7 +1,10 @@
 package httf.blockbounce;
 
+import httf.blockbounce.endscreen.EndScreen;
+import httf.blockbounce.game.Game;
 import httf.blockbounce.mainmenu.MainMenu;
 import javafx.application.Application;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Main extends Application {
