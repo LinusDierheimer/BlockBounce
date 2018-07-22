@@ -233,13 +233,15 @@ public class Game extends GameState{
 				//upPressed = false;
 				playerView.setImage(PLAYERJUMP_IMAGE);
 			}
-			if(upPressed == false) {
-				jumpTime = 0;
-			}
+			
 			
 			if(jumpTime > 0) {
 				playerY -=6.5;
 				jumpTime --;
+				if(upPressed == false) {
+					jumpTime = 0;
+					
+				}
 				if(jumpTime == 0) {
 					playerView.setImage(PLAYERLANDING_IMAGE);
 				}
