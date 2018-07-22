@@ -60,7 +60,7 @@ public class Game extends GameState{
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
-		playerView.setLayoutX(START_TILE_Y + playerView.getImage().getHeight());
+		playerView.setLayoutX(PLAYER_X); 
 	}
 				
 	private double playerY = 50;
