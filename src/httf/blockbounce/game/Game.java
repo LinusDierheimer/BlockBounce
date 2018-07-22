@@ -200,7 +200,7 @@ public class Game extends GameState{
 	
 	private void updatePlayer(double dt) {
 		double floorY = getHeight(PLAYER_X);
-		System.out.println("1 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
+		//System.out.println("1 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
 		if(floorY == 0) {
 			return;
 		}
@@ -210,7 +210,7 @@ public class Game extends GameState{
 			//playerView.setImage(PLAYER_IMAGE);
 		//}
 		if(playerY > main.getStage().getHeight()) {
-			stop(score);
+			stop();
 		}
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
@@ -223,7 +223,7 @@ public class Game extends GameState{
 		}
 			
 			if(upPressed && playerY == floorY) {
-				jumpTime = 25;
+				jumpTime = 40;
 				upPressed = false;
 				playerView.setImage(PLAYERJUMP_IMAGE);
 			}
@@ -236,7 +236,7 @@ public class Game extends GameState{
 				}
 			}
 		
-		System.out.println("2 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
+		//System.out.println("2 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
 		
 	}
 	
@@ -271,9 +271,9 @@ public class Game extends GameState{
 		renderScore(dt);
 	}
 	
-	public void stop(double score) {
+	public void stop() {
 		timer.stop();
-		main.setGameState(new EndScreen(main, score));
+		main.setGameState(new EndScreen(main));
 	}
 	
 	@Override
