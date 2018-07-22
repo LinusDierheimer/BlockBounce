@@ -41,6 +41,8 @@ public class Game extends GameState{
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
+	private static final double COLLISION_ACCEPTANCE = 5;
+	
 	private static final double MIN_TILE_HEIGHT = 100;
 	private static final double MAX_TILE_HEIGHT = 200;
 	private static double generateTileHeight() {
@@ -50,7 +52,7 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	private static final double START_TILE_X = 200;
 
-	private static final double GRAVITY_FORCE = 12;
+	private static final double GRAVITY_FORCE = 20;
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
@@ -196,15 +198,18 @@ public class Game extends GameState{
 		if(floorY == 0) {
 			return;
 		}
-		if(playerY < main.getStage().getWidth()) {
-			timer.stop();
-			main.setGameState(new EndScreen(main));
+		if(playerY - floorY <= COLLISION_ACCEPTANCE) {
+			playerY = floorY - playerView.getImage().getHeight();
+			playerView.setImage(PLAYER_IMAGE);
+		}
+		if(playerY > main.getStage().getHeight()) {
+			stop();
 		}
 		playerY += GRAVITY_FORCE * dt;
 		if(floorY > - 1) {
 			if(playerY >= floorY) 
 			{
-				playerY = floorY;
+				
 				playerView.setImage(PLAYER_IMAGE);
 			}
 			
