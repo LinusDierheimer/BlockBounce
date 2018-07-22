@@ -52,6 +52,8 @@ public class Game extends GameState{
 
 	private static final double GRAVITY_FORCE = 12;
 	
+	private static final double SCORE_INCREASOR = 0.3;
+	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
@@ -226,7 +228,7 @@ public class Game extends GameState{
 	}
 	
 	private void updateScore(double dt) {
-		score += 0.05;
+		score += SCORE_INCREASOR * dt;
 	}
 	
 	private void update(double dt) {
