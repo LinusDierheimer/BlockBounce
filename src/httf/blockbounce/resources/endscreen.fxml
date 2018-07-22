@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,33 +12,33 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
    <children>
-      <Label layoutX="83.0" layoutY="14.0" prefHeight="133.0" prefWidth="474.0" text="Game Over" textAlignment="CENTER" textFill="#ff0202">
-         <font>
-            <Font size="93.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="289.0" fitWidth="539.0" layoutX="63.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../Downloads/BlockBounce-master/bin/httf/blockbounce/resources/background.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="289.0" fitWidth="287.0" layoutX="188.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Snake.png" />
-         </image></ImageView>
-      <Button fx:id="retryButton" layoutX="83.0" layoutY="240.0" mnemonicParsing="false" onAction="#retryButtonPressed" prefHeight="40.0" prefWidth="75.0" text="Retry" />
-      <Button fx:id="mainMenuButton" layoutX="471.0" layoutY="240.0" mnemonicParsing="false" onAction="#mainMenuButtonPressed" prefHeight="40.0" prefWidth="80.0" text="Main Menu" />
-      <Label layoutX="204.0" layoutY="352.0" prefHeight="73.0" prefWidth="107.0" text="Score:" textFill="RED">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="scoreLabel" layoutX="375.0" layoutY="356.0" prefHeight="65.0" prefWidth="107.0" text="000" textFill="RED">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
+      <AnchorPane>
+         <children>
+            <Label layoutX="83.0" layoutY="5.0" prefHeight="133.0" prefWidth="474.0" text="Game Over" textAlignment="CENTER" textFill="#ff0202">
+               <font>
+                  <Font size="93.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="289.0" fitWidth="287.0" layoutX="189.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Snake.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="retryButton" layoutX="451.0" layoutY="220.0" mnemonicParsing="false" onAction="#retryButtonPressed" prefHeight="40.0" prefWidth="75.0" text="Retry" />
+            <Button fx:id="mainMenuButton" layoutX="116.0" layoutY="220.0" mnemonicParsing="false" onAction="#mainMenuButtonPressed" prefHeight="40.0" prefWidth="80.0" text="Main Menu" />
+            <Label layoutX="196.0" layoutY="343.0" prefHeight="73.0" prefWidth="70.0" text="Score:" textFill="RED">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="scoreLabel" layoutX="381.0" layoutY="347.0" prefHeight="65.0" prefWidth="107.0" text="000" textFill="RED">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

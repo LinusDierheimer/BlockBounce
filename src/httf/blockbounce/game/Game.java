@@ -6,6 +6,7 @@ import java.util.Random;
 
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
+import httf.blockbounce.endscreen.EndScreen;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -29,15 +30,11 @@ public class Game extends GameState{
 	private static final double WIDTH = BACKGROUND_IMAGE.getWidth();  //750
 	private static final double HEIGHT = BACKGROUND_IMAGE.getHeight(); //422
 
-	private Label scoreLabel = new Label("Score: 0");
-
 	private static final Random RANDOM = new Random();
 	private static final double randDouble(double min, double max) {
 		return RANDOM.nextDouble() * (max - min) + min;
 	}
-	
-	private List<TileView> tiles = new ArrayList<>();
-	
+		
 	private static final double MIN_TILE_DISTANCE = 50;
 	private static final double MAX_TILE_DISTANCE = 150;	
 	private static double generateDistance() {
@@ -53,14 +50,16 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	private static final double START_TILE_X = 200;
 
+	private static final double GRAVITY_FORCE = 12;
+	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
 		playerView.setLayoutX(START_TILE_X + playerView.getImage().getHeight());
 	}
 	
-	private static final double GRAVITY_FORCE = 12;
-	
+	private List<TileView> tiles = new ArrayList<>();
+		
 	private double playerY = 50;
 	private double jumpTime = 0;
 	private double score = 0;
@@ -77,6 +76,17 @@ public class Game extends GameState{
 		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
 			scale.setY(newValue.doubleValue() / HEIGHT);
 		});
+	}
+	
+	private Label scoreLabel = new Label("Score: 0");
+	{
+		scoreLabel.setLayoutX(30);
+		scoreLabel.setLayoutY(20);
+		//scoreLabel.setMinWidth(root.getWidth()- 30);
+		//scoreLabel.setTextAlignment(TextAlignment.RIGHT);
+		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
+		scoreLabel.setFont(new Font("Impact", 25));
+		root.getChildren().add(scoreLabel);
 	}
 	
 	private AnimationTimer timer = new AnimationTimer() {
@@ -110,15 +120,29 @@ public class Game extends GameState{
 		main.getStage().setFullScreenExitHint("");
 		main.getStage().setResizable(false);
 		main.getStage().setMaximized(false);
-		
-		root.getChildren().add(scoreLabel);
-		initLabel();
 	}
-	
-	
+		
 	@Override
 	public Scene getScene() {
 		return scene;
+	}
+	
+	public double getHeight(double screenX) {
+		
+		for(TileView tile : tiles) {
+			
+			if(screenX < tile.getLayoutX())
+				return -1;
+			
+			if(screenX > tile.getLayoutX() + tile.getTile().getWidth())
+				continue;
+			else {
+				return tile.getTopHeight(screenX - tile.getLayoutX());
+			}
+			
+		}
+		
+		return -1;
 	}
 	
 	private void addTile(Tile tile) {
@@ -164,52 +188,7 @@ public class Game extends GameState{
 		}
 		
 	}
-	private void renderScore(double dt) {
-		
-		long roundedScore = Math.round(score);
-		scoreLabel.setText("Score: " + roundedScore);
-		
-	}
 	
-	private void renderTiles(double dt) {
-		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
-	}
-	
-	/**
-	 * 
-	 * Returns the height of the tile at the given screen position.
-	 * If there is no tile, a negative number will be returned.
-	 * 
-	 * @param screenX
-	 * @return
-	 */
-	public double getHeight(double screenX) {
-				
-		for(TileView tile : tiles) {
-			
-			if(screenX < tile.getLayoutX())
-				return -1;
-			
-			if(screenX > tile.getLayoutX() + tile.getTile().getWidth())
-				continue;
-			else {
-				return tile.getTopHeight(screenX - tile.getLayoutX());
-			}
-			
-		}
-		
-		return -1;
-	}
-	
-	private void update(double dt) {
-		updateTiles(dt);
-		updatePlayer(dt);
-		updateScore(dt);
-	}
-	private void updateScore(double dt) {
-		score += 0.05;
-		
-	}
 	private void updatePlayer(double dt) {
 		double floorY = getHeight(START_TILE_X);
 
@@ -243,28 +222,45 @@ public class Game extends GameState{
 		
 	}
 	
-	private void render(double dt) {
-		renderTiles(dt);
-		renderPlayer(dt);
-		renderScore(dt);
+	private void updateScore(double dt) {
+		score += 0.05;
+	}
+	
+	private void update(double dt) {
+		updateTiles(dt);
+		updatePlayer(dt);
+		updateScore(dt);
+	}
+	
+	private void renderTiles(double dt) {
+		tiles.forEach(e -> e.moveLeft(TILE_SPEED * dt));
 	}
 	
 	private void renderPlayer(double dt) {
 		playerView.setLayoutY(playerY  - playerView.getImage().getHeight());
 	}
 	
+	private void renderScore(double dt) {
+		
+		long roundedScore = Math.round(score);
+		scoreLabel.setText("Score: " + roundedScore);
+		
+	}
+	
+	private void render(double dt) {
+		renderTiles(dt);
+		renderPlayer(dt);
+		renderScore(dt);
+	}
+	
+	public void stop() {
+		timer.stop();
+		main.setGameState(new EndScreen(main));
+	}
+	
 	@Override
 	public void run() {
 		timer.start();
 	}
-	
-	private void initLabel() {
-		
-		scoreLabel.setLayoutX(30);
-		scoreLabel.setLayoutY(20);
-		//scoreLabel.setMinWidth(root.getWidth()- 30);
-		//scoreLabel.setTextAlignment(TextAlignment.RIGHT);
-		scoreLabel.setTextFill(Color.ANTIQUEWHITE);
-		scoreLabel.setFont(new Font("Impact", 25));
-	}
+
 }
