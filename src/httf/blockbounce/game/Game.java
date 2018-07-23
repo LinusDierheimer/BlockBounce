@@ -50,11 +50,14 @@ public class Game extends GameState{
 	}
 	
 	private static final int TILE_SPEED = 20;
+	
 	private static final double START_TILE_Y = 200;
 	private static final double START_TILE_X = 0;
+	
 	private static final double LEFT_PLAYER_X = 100;
 	private static final double RIGHT_PLAYER_X = LEFT_PLAYER_X + PLAYER_IMAGE.getWidth();
-
+	private static final double START_PLAYER_Y = 50;
+	
 	private static final double GRAVITY_FORCE = 20;
 	private static final double MAX_JUMP_TIME = 40;
 	private static final double JUMP_FORCE = 6.5;
@@ -67,7 +70,7 @@ public class Game extends GameState{
 		playerView.setLayoutX(LEFT_PLAYER_X); 
 	}
 				
-	private double playerY = 50;
+	private double playerY = START_PLAYER_Y;
 	private double jumpTime = 0;
 	private double score = 0;
 	
@@ -265,6 +268,7 @@ public class Game extends GameState{
 	public void run() {
 		main.getStage().setScene(scene);
 		timer.start();
+		main.getStage().setMaximized(true);
 	}
 
 }

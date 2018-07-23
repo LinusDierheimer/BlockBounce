@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -13,33 +14,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="httf.blockbounce.endscreen.EndScreenController">
    <children>
-      <Label alignment="CENTER" prefHeight="115.0" prefWidth="640.0" text="Game Over">
-         <font>
-            <Font name="Impact" size="95.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="366.0" fitWidth="661.0" layoutX="-5.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="455.0" fitWidth="650.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@background.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="452.0" fitWidth="320.0" layoutX="160.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+      <Label alignment="CENTER" layoutX="78.0" layoutY="-22.0" prefHeight="153.0" prefWidth="490.0" text="Game Over" textFill="#720000">
+         <font>
+            <Font name="Impact" size="100.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="240.0" fitWidth="320.0" layoutX="211.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Snake.png" />
          </image>
       </ImageView>
-      <Button fx:id="retryButton" layoutX="75.0" layoutY="216.0" mnemonicParsing="false" onAction="#retryButtonPressed" prefHeight="49.0" prefWidth="85.0" text="Retry" />
-      <Button fx:id="mainMenuButton" layoutX="480.0" layoutY="216.0" mnemonicParsing="false" onAction="#mainMenuButtonPressed" prefHeight="49.0" prefWidth="99.0" text="Main Menu" />
-      <Text layoutX="172.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="84.99999618530273">
+      <Button fx:id="retryButton" blendMode="HARD_LIGHT" layoutX="112.0" layoutY="158.0" mnemonicParsing="false" onAction="#retryButtonPressed" prefHeight="49.0" prefWidth="99.0" text="Retry" />
+      <Button fx:id="mainMenuButton" alignment="CENTER" blendMode="HARD_LIGHT" layoutX="429.0" layoutY="158.0" mnemonicParsing="false" onAction="#mainMenuButtonPressed" prefHeight="49.0" prefWidth="99.0" text="Main Menu" />
+      <Text layoutX="218.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score:" wrappingWidth="75.13671875">
          <font>
-            <Font size="26.0" />
+            <Font size="21.0" />
          </font>
       </Text>
-      <Text fx:id="scoreLabel" layoutX="391.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="75.13671875">
+      <Text fx:id="scoreLabel" layoutX="369.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000" wrappingWidth="75.13671875">
          <font>
-            <Font size="27.0" />
+            <Font size="21.0" />
          </font>
       </Text>
    </children>
