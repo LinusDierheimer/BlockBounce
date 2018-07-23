@@ -52,21 +52,25 @@ public class Game extends GameState{
 	private static final int TILE_SPEED = 20;
 	private static final double START_TILE_Y = 200;
 	private static final double START_TILE_X = 0;
-	private static final double PLAYER_X = 100;
+	private static final double LEFT_PLAYER_X = 100;
+	private static final double RIGHT_PLAYER_X = LEFT_PLAYER_X + PLAYER_IMAGE.getWidth();
 
 	private static final double GRAVITY_FORCE = 20;
+	private static final double MAX_JUMP_TIME = 40;
+	private static final double JUMP_FORCE = 6.5;
 	
 	private static final double SCORE_INCREASOR = 0.2;
 	
 	private ImageView backgroundView = new ImageView(BACKGROUND_IMAGE);
 	private ImageView playerView = new ImageView(PLAYERLANDING_IMAGE);
 	{
-		playerView.setLayoutX(PLAYER_X); 
+		playerView.setLayoutX(LEFT_PLAYER_X); 
 	}
 				
 	private double playerY = 50;
 	private double jumpTime = 0;
 	private double score = 0;
+	private boolean isJumping = false;
 	
 	private AnchorPane root = new AnchorPane(backgroundView, playerView);
 	private Scene scene = new Scene(root);
@@ -183,49 +187,46 @@ public class Game extends GameState{
 	}
 	
 	private void updatePlayer(double dt) {
-		double floorY = getHeight(PLAYER_X);
-		if(floorY == 0) {
-			return;
-		}
+		double floorY = Math.max(getHeight(LEFT_PLAYER_X), getHeight(RIGHT_PLAYER_X));
+		
 		playerY += GRAVITY_FORCE * dt;
-		//
-		//	playerY = floorY;// playerView.getImage().getHeight();
-			//playerView.setImage(PLAYER_IMAGE);
-		//}
-		if(playerY > main.getStage().getHeight()) {
+		
+		//Stop game
+		if(playerY > HEIGHT) {
 			stop();
 		}
-		if(floorY > - 1) {
-			if(playerY >= floorY) 
-			{
-				if(playerY - floorY <= COLLISION_ACCEPTANCE) {
-					playerY = floorY;
-				}
-				playerView.setImage(PLAYER_IMAGE);
-			}
-		}
+		
+		//Acceptance for player
+		double minPlayerHeight = playerY - COLLISION_ACCEPTANCE;
+		double maxPlayerHeight = playerY + COLLISION_ACCEPTANCE;
+		
+		boolean playerIsOnTile = floorY >= minPlayerHeight && floorY <= maxPlayerHeight;
+		
+		if(isJumping) {
+			playerY -= JUMP_FORCE;
+			jumpTime --;
 			
-			if(upPressed && playerY == floorY) {
-				jumpTime = 40;
-				//upPressed = false;
+			//Stop jumping
+			if(jumpTime == 0 || !upPressed) {
+				playerView.setImage(PLAYERLANDING_IMAGE);
+				jumpTime = 0; // for !upPressed
+				isJumping = false;
+			}
+			
+		}else if(playerIsOnTile) {
+			
+			//walking
+			playerY = floorY;			
+				
+			//start jumping
+			if(upPressed) {
+				jumpTime = MAX_JUMP_TIME;
+				isJumping = true;
 				playerView.setImage(PLAYERJUMP_IMAGE);
-			}
-			
-			
-			if(jumpTime > 0) {
-				playerY -=6.5;
-				jumpTime --;
-				if(upPressed == false) {
-					jumpTime = 0;
-					
-				}
-				if(jumpTime == 0) {
-					playerView.setImage(PLAYERLANDING_IMAGE);
-				}
-			}
-		
-		//System.out.println("2 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
-		
+			}else
+				playerView.setImage(PLAYER_IMAGE);
+		}
+				
 	}
 	
 	private void updateScore(double dt) {
