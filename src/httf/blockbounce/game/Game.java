@@ -9,7 +9,6 @@ import httf.blockbounce.Main;
 import httf.blockbounce.endscreen.EndScreen;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.animation.AnimationTimer;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -75,7 +74,6 @@ public class Game extends GameState{
 	private double score = 0;
 	
 	private AnchorPane root = new AnchorPane(backgroundView, playerView);
-	private Scene scene = new Scene(root);
 	
 	private List<TileView> tiles = new ArrayList<>();
 	{
@@ -117,12 +115,12 @@ public class Game extends GameState{
 	
 	private volatile boolean upPressed = false; //volatile, because of use by JavaFX Thread and AnimationTimer Thread
 	{
-		scene.setOnKeyPressed(e -> {
+		main.getSceen().setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = true;
 			
 		});
-		scene.setOnKeyReleased(e -> {
+		main.getSceen().setOnKeyReleased(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = false;
 		});
@@ -266,9 +264,8 @@ public class Game extends GameState{
 	
 	@Override
 	public void run() {
-		main.getStage().setScene(scene);
+		main.getSceen().setRoot(root);
 		timer.start();
-		main.getStage().setMaximized(true);
 	}
 
 }

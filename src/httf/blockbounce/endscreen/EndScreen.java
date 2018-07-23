@@ -1,13 +1,8 @@
 package httf.blockbounce.endscreen;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-
 import httf.blockbounce.GameState;
 import httf.blockbounce.Main;
-import httf.blockbounce.resources.ResourceLoader;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
 public class EndScreen extends GameState{
@@ -21,12 +16,7 @@ public class EndScreen extends GameState{
 	
 	@Override
 	public void run() {
-		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL("endscreen.fxml"));
-		try {
-			loader.load();
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
-		}
+		FXMLLoader loader = getLoader("endscreen.fxml");
 		EndScreenController controller = loader.getController();
 		controller.main = main;
 		controller.scoreLabel.setText("" +Math.round(score));
@@ -34,7 +24,7 @@ public class EndScreen extends GameState{
 		Pane root = loader.getRoot();
 		addScale(root, root.getPrefWidth(), root.getPrefHeight());
 		
-		main.getStage().setScene(new Scene(root));
+		main.getSceen().setRoot(root);
 	}
 
 }

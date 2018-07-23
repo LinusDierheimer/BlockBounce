@@ -1,5 +1,12 @@
 package httf.blockbounce;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+
+import httf.blockbounce.resources.ResourceLoader;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 
@@ -13,7 +20,7 @@ public abstract class GameState implements Runnable{
 
 	//Utility methods
 		
-	protected final Scale addScale(Pane root, double width, double height) {
+	protected Scale addScale(Pane root, double width, double height) {
 		Scale scale = new Scale();
 		root.getTransforms().add(scale);
  		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
@@ -23,6 +30,25 @@ public abstract class GameState implements Runnable{
  			scale.setY(newValue.doubleValue() / height);
  		});
  		return scale;
+	}
+	
+	protected Scene createScene(Parent root) {
+		Scene actual = main.getStage().getScene();
+		return new Scene(root, actual.getWidth(), actual.getHeight());
+	}
+	
+	protected FXMLLoader getLoader(String resource) {
+		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL(resource));
+		try {
+			loader.load();
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
+		}
+		return loader;
+	}
+	
+	protected void setScene(Parent root) {
+		main.getStage().setScene(createScene(root));
 	}
 	
 }
