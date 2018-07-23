@@ -36,7 +36,7 @@ public class MainMenuController {
     
     @FXML
     void startgame(ActionEvent event) {
-		main.setGameState(new Game(main));
+		new Game(main).run();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

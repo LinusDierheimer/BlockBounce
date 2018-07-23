@@ -6,14 +6,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	private Stage stage;
+	private static final String WINDOW_TITLE = "Block Bouncer";
 	
-	public void setGameState(GameState state) {
-		this.stage.hide();
-		this.stage.setScene(state.getScene());
-		this.stage.show();
-		state.run();
-	}
+	private Stage stage;
 	
 	public Stage getStage() {
 		return stage;
@@ -22,7 +17,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception{
 		this.stage = stage;
-		setGameState(new MainMenu(this));
+		this.stage.setTitle(WINDOW_TITLE);
+		this.stage.setMaximized(true);
+		new MainMenu(this).run();
 		this.stage.show();
 	}
 	

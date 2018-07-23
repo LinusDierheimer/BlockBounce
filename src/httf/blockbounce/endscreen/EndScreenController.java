@@ -32,12 +32,12 @@ public class EndScreenController {
     
     @FXML
     void retryButtonPressed(ActionEvent event) {
-    	main.setGameState(new Game(main));
+    	new Game(main).run();
     }
 
     @FXML
     void mainMenuButtonPressed(ActionEvent event) {
-    	main.setGameState(new MainMenu(main));
+    	new MainMenu(main).run();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

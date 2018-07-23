@@ -18,9 +18,9 @@ public class EndScreen extends GameState{
 		super(main);
 		this.score = score;
 	}
-
+	
 	@Override
-	public Scene getScene() {
+	public void run() {
 		FXMLLoader loader = new FXMLLoader(ResourceLoader.loadAsURL("endscreen.fxml"));
 		try {
 			loader.load();
@@ -32,17 +32,9 @@ public class EndScreen extends GameState{
 		controller.scoreLabel.setText("" +Math.round(score));
 		
 		Pane root = loader.getRoot();
+		addScale(root, root.getPrefWidth(), root.getPrefHeight());
 		
-		main.getStage().setTitle("Block Bouncer");
-		main.getStage().setMinWidth(655);
-		main.getStage().setMinHeight(515);
-		main.getStage().setMaxWidth(655);
-		main.getStage().setMaxHeight(515);
-		
-		return new Scene(root);
+		main.getStage().setScene(new Scene(root));
 	}
-	
-	@Override
-	public void run() {}
 
 }

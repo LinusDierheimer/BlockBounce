@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Scale;
 
 public class Game extends GameState{
 	
@@ -79,18 +80,8 @@ public class Game extends GameState{
 		root.getChildren().add(view);
 	}
 	
-/*	
- *	private Scale scale = new Scale();
- *	{
- *		root.getTransforms().add(scale);
- *		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
- *			scale.setX(newValue.doubleValue() / WIDTH);
- *		});
- *		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
- *			scale.setY(newValue.doubleValue() / HEIGHT);
- *		});
- *	}
-*/
+ 	@SuppressWarnings("unused")
+	private Scale scale = addScale(root, WIDTH, HEIGHT);
  	
 	private Label scoreLabel = new Label("Score: 0");
 	{
@@ -134,19 +125,6 @@ public class Game extends GameState{
 	
 	public Game(Main main) {
 		super(main);
-		//main.getStage().setMaximized(true);
-		main.getStage().setMaxWidth(WIDTH);
-		main.getStage().setMaxHeight(HEIGHT);
-		main.getStage().setMinWidth(WIDTH);
-		main.getStage().setMinHeight(HEIGHT);
-		main.getStage().setFullScreenExitHint("");
-		main.getStage().setResizable(false);
-		main.getStage().setMaximized(false);
-	}
-		
-	@Override
-	public Scene getScene() {
-		return scene;
 	}
 	
 	public double getHeight(double screenX) {
@@ -192,7 +170,7 @@ public class Game extends GameState{
 			addTile(); //should never happen
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
-			if(lastTile.rightX() < main.getStage().getWidth() - (nextDistance)) {
+			if(lastTile.rightX() < WIDTH - (nextDistance)) {
 				addTile();
 				nextDistance = generateDistance();
 			}
@@ -206,7 +184,6 @@ public class Game extends GameState{
 	
 	private void updatePlayer(double dt) {
 		double floorY = getHeight(PLAYER_X);
-		//System.out.println("1 F: " + floorY + " P: " + playerY + " J: " + jumpTime);
 		if(floorY == 0) {
 			return;
 		}
@@ -284,11 +261,12 @@ public class Game extends GameState{
 	
 	public void stop() {
 		timer.stop();
-		main.setGameState(new EndScreen(main, score));
+		new EndScreen(main, score).run();
 	}
 	
 	@Override
 	public void run() {
+		main.getStage().setScene(scene);
 		timer.start();
 	}
 
