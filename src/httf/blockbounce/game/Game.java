@@ -70,7 +70,6 @@ public class Game extends GameState{
 	private double playerY = 50;
 	private double jumpTime = 0;
 	private double score = 0;
-	private boolean isJumping = false;
 	
 	private AnchorPane root = new AnchorPane(backgroundView, playerView);
 	private Scene scene = new Scene(root);
@@ -113,7 +112,7 @@ public class Game extends GameState{
 		}
 	};
 	
-	private boolean upPressed = false;
+	private volatile boolean upPressed = false; //volatile, because of use by JavaFX Thread and AnimationTimer Thread
 	{
 		scene.setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
@@ -123,7 +122,6 @@ public class Game extends GameState{
 		scene.setOnKeyReleased(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = false;
-			
 		});
 	}
 	
@@ -197,12 +195,12 @@ public class Game extends GameState{
 		}
 		
 		//Acceptance for player
-		double minPlayerHeight = playerY - COLLISION_ACCEPTANCE;
-		double maxPlayerHeight = playerY + COLLISION_ACCEPTANCE;
+		final double minPlayerHeight = playerY + COLLISION_ACCEPTANCE;
+		final double maxPlayerHeight = playerY - COLLISION_ACCEPTANCE;
 		
-		boolean playerIsOnTile = floorY >= minPlayerHeight && floorY <= maxPlayerHeight;
+		final boolean playerIsOnTile = floorY <= minPlayerHeight && floorY >=maxPlayerHeight;
 		
-		if(isJumping) {
+		if(jumpTime > 0) {
 			playerY -= JUMP_FORCE;
 			jumpTime --;
 			
@@ -210,7 +208,6 @@ public class Game extends GameState{
 			if(jumpTime == 0 || !upPressed) {
 				playerView.setImage(PLAYERLANDING_IMAGE);
 				jumpTime = 0; // for !upPressed
-				isJumping = false;
 			}
 			
 		}else if(playerIsOnTile) {
@@ -221,7 +218,6 @@ public class Game extends GameState{
 			//start jumping
 			if(upPressed) {
 				jumpTime = MAX_JUMP_TIME;
-				isJumping = true;
 				playerView.setImage(PLAYERJUMP_IMAGE);
 			}else
 				playerView.setImage(PLAYER_IMAGE);
