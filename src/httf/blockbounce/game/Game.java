@@ -42,8 +42,8 @@ public class Game extends GameState{
 	
 	private static final double COLLISION_ACCEPTANCE = 10;
 	
-	private static final double MIN_TILE_HEIGHT = 75;
-	private static final double MAX_TILE_HEIGHT = 160;
+	private static final double MIN_TILE_HEIGHT = 50;
+	private static final double MAX_TILE_HEIGHT = 145;
 	private static double generateTileHeight() {
 		return randDouble(MIN_TILE_HEIGHT, MAX_TILE_HEIGHT);
 	}
