@@ -35,15 +35,15 @@ public class Game extends GameState{
 	}
 		
 	private static final double MIN_TILE_DISTANCE = 20;
-	private static final double MAX_TILE_DISTANCE = 100;	
+	private static final double MAX_TILE_DISTANCE = 120;	
 	private static double generateDistance() {
 		return randDouble(MIN_TILE_DISTANCE, MAX_TILE_DISTANCE);
 	}
 	
 	private static final double COLLISION_ACCEPTANCE = 10;
 	
-	private static final double MIN_TILE_HEIGHT = 100;
-	private static final double MAX_TILE_HEIGHT = 150;
+	private static final double MIN_TILE_HEIGHT = 75;
+	private static final double MAX_TILE_HEIGHT = 160;
 	private static double generateTileHeight() {
 		return randDouble(MIN_TILE_HEIGHT, MAX_TILE_HEIGHT);
 	}
