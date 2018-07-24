@@ -6,7 +6,6 @@ import java.io.UncheckedIOException;
 import httf.blockbounce.resources.ResourceLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
 
@@ -21,20 +20,18 @@ public abstract class GameState implements Runnable{
 	//Utility methods
 		
 	protected Scale addScale(Pane root, double width, double height) {
-		Scale scale = new Scale();
+		Scale scale = new Scale(
+				main.getScene().getWidth() / width,
+				main.getScene().getHeight() / height
+		);
 		root.getTransforms().add(scale);
- 		main.getStage().widthProperty().addListener((observable, oldValue, newValue) -> {
+ 		main.getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
  			scale.setX(newValue.doubleValue() / width);
  		});
- 		main.getStage().heightProperty().addListener((observable, oldValue, newValue) -> {
+ 		main.getScene().heightProperty().addListener((observable, oldValue, newValue) -> {
  			scale.setY(newValue.doubleValue() / height);
  		});
  		return scale;
-	}
-	
-	protected Scene createScene(Parent root) {
-		Scene actual = main.getStage().getScene();
-		return new Scene(root, actual.getWidth(), actual.getHeight());
 	}
 	
 	protected FXMLLoader getLoader(String resource) {
@@ -48,7 +45,7 @@ public abstract class GameState implements Runnable{
 	}
 	
 	protected void setScene(Parent root) {
-		main.getStage().setScene(createScene(root));
+		main.getStage().getScene().setRoot(root);
 	}
 	
 }

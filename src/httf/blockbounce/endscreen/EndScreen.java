@@ -24,7 +24,7 @@ public class EndScreen extends GameState{
 		Pane root = loader.getRoot();
 		addScale(root, root.getPrefWidth(), root.getPrefHeight());
 		
-		main.getSceen().setRoot(root);
+		setScene(root);
 	}
 
 }

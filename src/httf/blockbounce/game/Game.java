@@ -115,12 +115,12 @@ public class Game extends GameState{
 	
 	private volatile boolean upPressed = false; //volatile, because of use by JavaFX Thread and AnimationTimer Thread
 	{
-		main.getSceen().setOnKeyPressed(e -> {
+		main.getScene().setOnKeyPressed(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = true;
 			
 		});
-		main.getSceen().setOnKeyReleased(e -> {
+		main.getScene().setOnKeyReleased(e -> {
 			if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.SPACE)
 				upPressed = false;
 		});
@@ -264,7 +264,7 @@ public class Game extends GameState{
 	
 	@Override
 	public void run() {
-		main.getSceen().setRoot(root);
+		setScene(root);
 		timer.start();
 	}
 

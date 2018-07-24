@@ -17,7 +17,7 @@ public class Main extends Application {
 		return stage;
 	}
 	
-	public Scene getSceen() {
+	public Scene getScene() {
 		return stage.getScene();
 	}
 	
@@ -25,7 +25,7 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception{
 		this.stage = stage;
 		this.stage.setTitle(WINDOW_TITLE);
-		this.stage.setFullScreen(true);
+		this.stage.setMaximized(true);
 	
 		Scene scene = new Scene(new BorderPane(), Paint.valueOf("black"));
 		this.stage.setScene(scene);
