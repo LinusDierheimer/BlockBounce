@@ -48,9 +48,12 @@ public class Game extends GameState{
 	private static final double MAX_TILE_HEIGHT_DIFFERENCE = 100;
 	private static final double MIN_TILE_HEIGHT_DIFFERENCE = 0;
 	private static double generateTileHeight(double previousTileHeight) {
-		
-		boolean goUp = RANDOM.nextBoolean();
-		
+
+		boolean goUp = 
+				previousTileHeight == MIN_TILE_HEIGHT ? true :
+				previousTileHeight == MAX_TILE_HEIGHT ? false :
+				RANDOM.nextBoolean();
+				
 		double min = goUp ? previousTileHeight - MIN_TILE_HEIGHT_DIFFERENCE : previousTileHeight + MAX_TILE_HEIGHT_DIFFERENCE;
 		double max = goUp ? previousTileHeight - MAX_TILE_HEIGHT_DIFFERENCE : previousTileHeight + MIN_TILE_HEIGHT_DIFFERENCE;
 					
@@ -212,7 +215,7 @@ public class Game extends GameState{
 		final double minPlayerHeight = playerY + COLLISION_ACCEPTANCE;
 		final double maxPlayerHeight = playerY - COLLISION_ACCEPTANCE;
 		
-		final boolean playerIsOnTile = floorY <= minPlayerHeight && floorY >=maxPlayerHeight;
+		final boolean playerIsOnTile = floorY <= minPlayerHeight && floorY >= maxPlayerHeight;
 		
 		if(jumpTime > 0) {
 			playerY -= JUMP_FORCE;
