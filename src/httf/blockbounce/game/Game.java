@@ -42,10 +42,22 @@ public class Game extends GameState{
 	
 	private static final double COLLISION_ACCEPTANCE = 10;
 	
-	private static final double MIN_TILE_HEIGHT = 50;
-	private static final double MAX_TILE_HEIGHT = 145;
-	private static double generateTileHeight() {
-		return randDouble(MIN_TILE_HEIGHT, MAX_TILE_HEIGHT);
+	private static final double MIN_TILE_HEIGHT = HEIGHT - 100; //because of 0 is top and HEIGHT is bottom
+	private static final double MAX_TILE_HEIGHT = 150;
+	private static final double MAX_TILE_HEIGHT_DIFFERENCE = 100;
+	private static final double MIN_TILE_HEIGHT_DIFFERENCE = 0;
+	private static double generateTileHeight(double previousTileHeight) {
+		
+		boolean goUp = RANDOM.nextBoolean();
+		
+		double min = goUp ? previousTileHeight - MIN_TILE_HEIGHT_DIFFERENCE : previousTileHeight + MAX_TILE_HEIGHT_DIFFERENCE;
+		double max = goUp ? previousTileHeight - MAX_TILE_HEIGHT_DIFFERENCE : previousTileHeight + MIN_TILE_HEIGHT_DIFFERENCE;
+					
+		return randDouble(
+				min > MIN_TILE_HEIGHT ? MIN_TILE_HEIGHT : min,
+				max < MAX_TILE_HEIGHT ? MAX_TILE_HEIGHT : max
+		);
+		
 	}
 	
 	private static final int TILE_SPEED = 20;
@@ -148,17 +160,17 @@ public class Game extends GameState{
 		return -1;
 	}
 	
-	private void addTile(Tile tile) {
+	private void addTile(double prevHeight, Tile tile) {
 		TileView view = tile.createView();
-		view.setLayoutY(generateTileHeight() + view.getTile().getHeight());
+		view.setLayoutY(generateTileHeight(prevHeight));
 		view.setLayoutX(WIDTH);
 		tiles.add(view);
 		root.getChildren().add(view);
 	}
 	
-	private void addTile() {
+	private void addTile(double prevHeight) {
 		Tile randomTile = Tile.TILES.get(RANDOM.nextInt(Tile.TILES.size()));
-		addTile(randomTile);
+		addTile(prevHeight, randomTile);
 	}
 	
 	private void removeTile(TileView view) {
@@ -170,11 +182,11 @@ public class Game extends GameState{
 	private void updateTiles(double dt) {
 		
 		if(tiles.isEmpty())
-			addTile(); //should never happen
+			addTile(START_TILE_Y); //should never happen
 		else {
 			TileView lastTile = tiles.get(tiles.size() - 1);
 			if(lastTile.rightX() < WIDTH - (nextDistance)) {
-				addTile();
+				addTile(lastTile.getLayoutY());
 				nextDistance = generateDistance();
 			}
 		
