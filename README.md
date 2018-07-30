@@ -1,10 +1,8 @@
 # Block Bounce
 
-This game, in that you simply jump from tile to tile, was written as part of [Hack to the Future Friedrichshaven](#Contact). It uses [JavaFX](#Third-Party) as rendering framework.  
+This game, in that you simply jump from tile to tile, was written as part of [Hack to the Future Friedrichshaven](#contact). It uses [JavaFX](#third-Party) as rendering framework.  
 It is licensed under the GNU GPLv3, which can be found in the [LICENSE](LICENSE) file.  
 Have fun with it!
-
----
 
 ## General
 
@@ -16,15 +14,11 @@ Have fun with it!
 
 * Main class: `httf.blockbounce.Main.java`
 
----
-
 ## Third-Party
 
 * Java: https://www.java.com/
 
 * assets: https://jesse-m.itch.io/jungle-pack/
-
----
 
 ## Contact
 
