@@ -1,6 +1,6 @@
 # Block Bounce
 
-This game, in that you simply jump from tile to tile, was written as part of [Hack to the Future Friedrichshaven](#contact). It uses [JavaFX](#third-Party) as rendering framework.  
+This game, in that you simply jump from tile to tile, was written as part of [Hack to the Future Friedrichshaven](#contact). It uses [JavaFX](#third-party) as rendering framework.  
 It is licensed under the GNU GPLv3, which can be found in the [LICENSE](LICENSE) file.  
 Have fun with it!
 
